@@ -1,0 +1,23 @@
+{
+  "name": "gvdg-tournament-scraper",
+  "version": "2.0.0",
+  "description": "Scrapes disc golf tournaments from discgolfscene.com within 60 miles of Greenville, NC using their location search filter",
+  "main": "scrape-tournaments.js",
+  "scripts": {
+    "scrape": "node scrape-tournaments.js",
+    "test": "node scrape-tournaments.js"
+  },
+  "keywords": [
+    "disc-golf",
+    "gvdg",
+    "greenville",
+    "tournaments",
+    "scraper",
+    "discgolfscene"
+  ],
+  "author": "Greenville Disc Golf Club",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
