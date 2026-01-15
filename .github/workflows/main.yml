@@ -1,19 +1,24 @@
-name: Scrape Tournaments
+# .github/workflows/scrape-tournaments.yml
+# 
+# This workflow runs the tournament scraper on a schedule and commits
+# the updated tournaments.json back to the repository.
+
+name: Scrape DGS Tournaments
 
 on:
-  # Run daily at 6 AM UTC (1 AM EST / 2 AM EDT)
+  # Run every 6 hours
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 */6 * * *'
   
-  # Allow manual trigger from GitHub Actions tab
+  # Allow manual trigger
   workflow_dispatch:
   
-  # Also run on push to main (for testing)
+  # Run on push to main (for testing)
   push:
     branches:
       - main
     paths:
-      - 'gvdg-tournament-scraper/scrape-tournaments.js'
+      - 'dgs-scraper.py'
       - '.github/workflows/scrape-tournaments.yml'
 
 jobs:
@@ -26,64 +31,41 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '20'
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
       
       - name: Run scraper
-        working-directory: ./gvdg-tournament-scraper
-        run: node scrape-tournaments.js
-        continue-on-error: true
+        run: python dgs-scraper.py
       
-      - name: Check if tournaments.json was updated
-        id: check_changes
+      - name: Check for changes
+        id: git-check
         run: |
-          if [ ! -f gvdg-tournament-scraper/tournaments.json ]; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No tournaments.json file found"
-          elif git diff --quiet gvdg-tournament-scraper/tournaments.json 2>/dev/null; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-            echo "No changes to tournament data"
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-            echo "Tournament data updated!"
-          fi
+          git diff --quiet tournaments.json || echo "changed=true" >> $GITHUB_OUTPUT
       
-      - name: Commit and push changes
-        if: steps.check_changes.outputs.changed == 'true'
+      - name: Commit and push if changed
+        if: steps.git-check.outputs.changed == 'true'
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
-          git add gvdg-tournament-scraper/tournaments.json
-          git commit -m "🥏 Update tournament data - $(date +'%Y-%m-%d %H:%M UTC')"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add tournaments.json
+          git commit -m "Update tournaments.json [automated]"
           git push
       
-      - name: Generate Summary
+      - name: Summary
         run: |
-          echo "## 🥏 Tournament Scrape Results" >> $GITHUB_STEP_SUMMARY
+          echo "## Scraper Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          if [ -f gvdg-tournament-scraper/tournaments.json ]; then
-            TOTAL=$(jq '.totalCount' gvdg-tournament-scraper/tournaments.json)
-            GVDG=$(jq '[.tournaments[] | select(.isGVDG == true)] | length' gvdg-tournament-scraper/tournaments.json)
-            UPDATED=$(jq -r '.lastUpdated' gvdg-tournament-scraper/tournaments.json)
-            HAS_ERROR=$(jq -r '.error // empty' gvdg-tournament-scraper/tournaments.json)
-            
-            echo "- **Total Tournaments:** $TOTAL" >> $GITHUB_STEP_SUMMARY
-            echo "- **GVDG Events:** $GVDG" >> $GITHUB_STEP_SUMMARY
-            echo "- **Last Updated:** $UPDATED" >> $GITHUB_STEP_SUMMARY
-            
-            if [ -n "$HAS_ERROR" ]; then
-              echo "- ⚠️ **Note:** Using fallback data (fetch error)" >> $GITHUB_STEP_SUMMARY
-            fi
-            
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### Upcoming Events (Next 10)" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            jq -r '.tournaments[:10][] | "- **\(.date)** - \(.name) @ \(.city // "TBD") \(if .isGVDG then "⭐" else "" end)"' gvdg-tournament-scraper/tournaments.json >> $GITHUB_STEP_SUMMARY
+          if [ -f tournaments.json ]; then
+            COUNT=$(python -c "import json; print(len(json.load(open('tournaments.json'))['tournaments']))")
+            echo "✅ Found **$COUNT** tournaments" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ No tournaments.json file found" >> $GITHUB_STEP_SUMMARY
+            echo "❌ No tournaments.json generated" >> $GITHUB_STEP_SUMMARY
           fi
