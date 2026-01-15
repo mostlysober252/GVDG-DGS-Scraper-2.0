@@ -1,12 +1,22 @@
 {
-  "lastUpdated": "2026-01-14T12:00:00",
+  "lastUpdated": "2026-01-15T16:48:58.677597",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
     {
-      "name": "Zebulon Flex XXI",
+      "name": "PDGAAll eventsWithin 60 miles of Greenville, NCAny formatAll upcoming",
       "date": "2026-01-19",
-      "city": "Zebulon, NC",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/search-filter",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "11/72"
+    },
+    {
+      "name": "Jan19MonZebulon Flex XXIMon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC11",
+      "date": "2026-01-19",
+      "city": "The Z at Zebulon Community Park Zebulon, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/Zebulon_Flex_XXI_2026",
       "distance": 55,
@@ -14,29 +24,29 @@
       "spots": null
     },
     {
-      "name": "2026 GVDG Chili Bowl",
+      "name": "Jan24Sat2026 GVDG Chili BowlPDGA XC-tier · Sat, Jan 24, 2026Farmville Municipal DGCFarmville, NC11 / 721XC-tier",
       "date": "2026-01-24",
-      "city": "Farmville, NC",
-      "tier": "XC",
-      "url": "https://www.discgolfscene.com/tournaments/2026_GVDG_Chili_Bowl",
+      "city": "Farmville Municipal DGC Farmville, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
       "distance": 10,
       "isGVDG": true,
-      "spots": "10/72"
+      "spots": "11/72"
     },
     {
-      "name": "White Oak Gold Grand Opening",
+      "name": "Jan24SatWhite Oak Gold Grand OpeningSat, Jan 24, 2026White Oak River CampgroundMaysville, NC1",
       "date": "2026-01-24",
-      "city": "Maysville, NC",
+      "city": "White Oak River Campground Maysville, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/White_Oak_Gold_Grand_Opening_2026",
+      "url": "https://www.discgolfscene.com/tournaments/White_Oak_Gold_Grand_Opening_2025",
       "distance": 50,
       "isGVDG": false,
       "spots": null
     },
     {
-      "name": "JDC of NC Membership Drive",
+      "name": "Jan25SunJDC of NC Membership DrivePDGA C-tier · Sun, Jan 25, 2026Northeast Creek ParkJacksonville, NC13 / 721C-tier",
       "date": "2026-01-25",
-      "city": "Jacksonville, NC",
+      "city": "Northeast Creek Park Jacksonville, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/JDC_of_NC_Membership_Drive_2026",
       "distance": 50,
@@ -44,39 +54,39 @@
       "spots": "13/72"
     },
     {
-      "name": "Kings Cup XXI Pro / Am driven by Innova",
+      "name": "Jan-Feb31-1Sat-SunKings Cup XXI Pro / Am driven by InnovaPDGA B-tier · Sat-Sun, Jan 31-Feb 1, 2026Barnet ParkKinston, NC90 / 903B-tier",
       "date": "2026-01-31",
-      "city": "Kinston, NC",
+      "city": "Barnet Park Kinston, NC",
       "tier": "B",
-      "url": "https://www.discgolfscene.com/tournaments/Kings_Cup_XXI_Pro_Am_2026",
+      "url": "https://www.discgolfscene.com/tournaments/Kings_Cup_XX_Pro_Am_2026",
       "distance": 28,
       "isGVDG": false,
       "spots": "90/90"
     },
     {
-      "name": "16th Annual Rocky Mount Ice Bowl",
+      "name": "Feb7Sat16th Annual Rocky Mount Ice BowlSat, Feb 7, 2026Battle Park DGCRocky Mount, NC12 / 722",
       "date": "2026-02-07",
-      "city": "Rocky Mount, NC",
+      "city": "Battle Park DGC Rocky Mount, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/16th_Annual_Rocky_Mount_Ice_Bowl_2026",
       "distance": 40,
       "isGVDG": false,
-      "spots": "11/72"
+      "spots": "12/72"
     },
     {
-      "name": "2026 Ayden Founders' Day Classic - Sponsored by Climo Disc Golf",
+      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC18 / 722XC-tier",
       "date": "2026-02-07",
-      "city": "Ayden, NC",
-      "tier": "XC",
-      "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Day_Classic",
+      "city": "Ayden District Park Ayden, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Classic_2026",
       "distance": 10,
       "isGVDG": true,
       "spots": "18/72"
     },
     {
-      "name": "OFDA February Monthly",
+      "name": "Feb15SunOFDA February MonthlyPDGA C-tier · Sun, Feb 15, 2026Richlands-Steed ParkRichlands, NC41C-tier",
       "date": "2026-02-15",
-      "city": "Richlands, NC",
+      "city": "Steed Park Richlands, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/OFDA_February_Monthly_2026",
       "distance": 55,
@@ -84,9 +94,9 @@
       "spots": null
     },
     {
-      "name": "The Barnet Brawl",
+      "name": "Feb28SatThe Barnet BrawlSat, Feb 28, 2026Barnet ParkKinston, NC",
       "date": "2026-02-28",
-      "city": "Kinston, NC",
+      "city": "Barnet Park Kinston, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/The_Barnet_Brawl_2026",
       "distance": 28,
@@ -94,9 +104,9 @@
       "spots": null
     },
     {
-      "name": "Spring Break Flex 2026",
+      "name": "Mar6FriSpring Break Flex 2026PDGA Flex C-tier · Fri, Mar 6, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startFri, Jan 30 at 8:00am                        ESTC-tier",
       "date": "2026-03-06",
-      "city": "Rocky Mount, NC",
+      "city": "North Carolina Wesleyan University Rocky Mount, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Spring_Break_Flex_2026",
       "distance": 40,
@@ -104,39 +114,39 @@
       "spots": null
     },
     {
-      "name": "Discraft Presents: Spike Hyzer's: North Carolina Disc Golf Championship XV",
+      "name": "Mar20-22Fri-SunDiscraft Presents: Spike Hyzer's: North Carolina Disc Golf Championship XV Supported By Grip EQ.PDGA A-tier · Fri-Sun, Mar 20-22, 2026Sunset ParkRocky Mount, NC35 / 2443A-tier",
       "date": "2026-03-20",
-      "city": "Rocky Mount, NC",
+      "city": "Sunset Park Rocky Mount, NC",
       "tier": "A",
-      "url": "https://www.discgolfscene.com/tournaments/NC_Disc_Golf_Championship_XV_2026",
+      "url": "https://www.discgolfscene.com/tournaments/Discraft_Presents_Spike_Hyzers_North_Carolina_Disc_Golf_Championship_XV_Supported_By_Grip_EQ_2026",
       "distance": 40,
       "isGVDG": false,
       "spots": "35/244"
     },
     {
-      "name": "Lancer Chain Chaser 9",
+      "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC5 / 952Sun, Jan 18 at 6:00pm                        ESTXC-tier",
       "date": "2026-04-12",
-      "city": "Kinston, NC",
-      "tier": "XC",
+      "city": "Lenoir Community College Kinston, NC",
+      "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Lancer_Chain_Chaser_9_2026",
       "distance": 28,
       "isGVDG": false,
       "spots": "5/95"
     },
     {
-      "name": "Crom Transmission & Automotive Specialist Presents The 6th Annual Kinston Open",
+      "name": "Jul17-19Fri-SunCrom Transmission & Automotive Specialist Presents The 6th Annual Kinston Open Supported By InnovaFri-Sun, Jul 17-19, 2026Kinston Country Club Temp courseKinston, NCWed, Apr 8 at 8:00pm                        EDT",
       "date": "2026-07-17",
-      "city": "Kinston, NC",
+      "city": "Kinston Country Club Temp course Kinston, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/6th_Annual_Kinston_Open_2026",
+      "url": "https://www.discgolfscene.com/tournaments/Crom_Transmission_and_Automotive_Specialist_Presents_The_5th_Annual_Kinston_Open_Supported_By_Innova_2026",
       "distance": 28,
       "isGVDG": false,
       "spots": null
     },
     {
-      "name": "Bill Fay Clubs and Dubs",
+      "name": "Aug29SatBill Fay Clubs and DubsSat, Aug 29, 2026Joel Smith Memorial at Bill Fay ParkKinston, NC2DoublesMon, Jul 20 at 12:00am                        EDT",
       "date": "2026-08-29",
-      "city": "Kinston, NC",
+      "city": "Joel Smith Memorial at Bill Fay Park Kinston, NC",
       "tier": "Doubles",
       "url": "https://www.discgolfscene.com/tournaments/Bill_Fay_Clubs_and_Dubs_2026",
       "distance": 28,
@@ -144,21 +154,21 @@
       "spots": null
     },
     {
-      "name": "The Joel Smith Memorial Birdie Shootout **Finale**",
+      "name": "Sep12-13Sat-SunThe Joel Smith Memorial Birdie Shootout **Finale**Sat-Sun, Sep 12-13, 2026Barnet ParkKinston, NC4Thu, Jul 30 at 12:00am                        EDT",
       "date": "2026-09-12",
-      "city": "Kinston, NC",
+      "city": "Barnet Park Kinston, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/Joel_Smith_Memorial_Birdie_Shootout_Finale_2026",
+      "url": "https://www.discgolfscene.com/tournaments/The_Joel_Smith_Memorial_Finale_2026",
       "distance": 28,
       "isGVDG": false,
       "spots": null
     },
     {
-      "name": "Scorpion Disc Golf Match Play Invitational",
+      "name": "Dec12-13Sat-SunScorpion Disc Golf Match Play InvitationalSat-Sun, Dec 12-13, 2026Barnet ParkKinston, NC4Teams",
       "date": "2026-12-12",
-      "city": "Kinston, NC",
+      "city": "Barnet Park Kinston, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/Scorpion_DG_Match_Play_Invitational_2026",
+      "url": "https://www.discgolfscene.com/tournaments/Scorpion_Disc_Golf_Match_Play_Invitational_2026",
       "distance": 28,
       "isGVDG": false,
       "spots": null
