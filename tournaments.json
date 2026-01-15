@@ -1,121 +1,164 @@
 {
-  "lastUpdated": "2024-12-24T12:00:00.000Z",
-  "centerPoint": {
-    "name": "Greenville, NC",
-    "zip": "27858",
-    "lat": 35.589407,
-    "lng": -77.351275
-  },
-  "radiusMiles": 60,
-  "searchUrl": "https://www.discgolfscene.com/tournaments/search?filter%5Blocation%5D%5Bcountry%5D=USA&filter%5Blocation%5D%5Bname%5D=Greenville%2C+NC&filter%5Blocation%5D%5Bzip%5D=27858&filter%5Blocation%5D%5Blatitude%5D=35.589407&filter%5Blocation%5D%5Blongitude%5D=-77.351275&filter%5Blocation%5D%5Bdistance%5D=60&filter%5Blocation%5D%5Bunits%5D=mi&filter%5Bformat%5D%5B0%5D=s&filter%5Bformat%5D%5B1%5D=d&filter%5Bformat%5D%5B2%5D=t",
-  "totalCount": 10,
+  "lastUpdated": "2026-01-14T12:00:00",
+  "searchCenter": "Greenville, NC",
+  "searchRadius": 60,
   "tournaments": [
     {
-      "name": "2025 Whiskey/Bourbon Open The Bottle",
-      "date": "2025-12-27",
-      "venue": "Creek Side",
-      "city": "New Bern, NC",
+      "name": "Zebulon Flex XXI",
+      "date": "2026-01-19",
+      "city": "Zebulon, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/2025_Whiskey_Bourbon_Open_The_Bottle",
-      "distance": 38,
-      "isGVDG": false,
-      "spots": "16"
-    },
-    {
-      "name": "The Final 31",
-      "date": "2025-12-31",
-      "venue": "Northeast Creek Park",
-      "city": "Jacksonville, NC",
-      "tier": "XC",
-      "url": "https://www.discgolfscene.com/tournaments/The_Final_31_2025",
+      "url": "https://www.discgolfscene.com/tournaments/Zebulon_Flex_XXI_2026",
       "distance": 55,
       "isGVDG": false,
-      "spots": "26/60"
+      "spots": null
     },
     {
-      "name": "The Hangover 6 (Morning)",
-      "date": "2026-01-01",
-      "venue": "West Meadowbrook Park",
-      "city": "Greenville, NC",
-      "tier": "C",
-      "url": "https://www.discgolfscene.com/tournaments/The_Hangover_6_2026",
-      "distance": 0,
-      "isGVDG": true,
-      "spots": "12/72"
-    },
-    {
-      "name": "The Hangover 7 (Afternoon)",
-      "date": "2026-01-01",
-      "venue": "West Meadowbrook Park",
-      "city": "Greenville, NC",
-      "tier": "C",
-      "url": "https://www.discgolfscene.com/tournaments/The_Hangover_7_2026",
-      "distance": 0,
+      "name": "2026 GVDG Chili Bowl",
+      "date": "2026-01-24",
+      "city": "Farmville, NC",
+      "tier": "XC",
+      "url": "https://www.discgolfscene.com/tournaments/2026_GVDG_Chili_Bowl",
+      "distance": 10,
       "isGVDG": true,
       "spots": "10/72"
     },
     {
-      "name": "2026 Goat Neck Farms Fling in the New Year",
-      "date": "2026-01-01",
-      "venue": "Goat Neck Farms Disc Golf Course",
-      "city": "Columbia, NC",
-      "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/2026_Goat_Neck_Farms_Fling_in_the_New_Year_2026",
-      "distance": 45,
-      "isGVDG": false,
-      "spots": "3"
-    },
-    {
-      "name": "GVDG Frozen Bowl and Chili Cookoff",
-      "date": "2026-01-24",
-      "venue": "Farmville Municipal DGC",
-      "city": "Farmville, NC",
-      "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
-      "distance": 10,
-      "isGVDG": true,
-      "spots": null
-    },
-    {
       "name": "White Oak Gold Grand Opening",
       "date": "2026-01-24",
-      "venue": "White Oak River Campground",
       "city": "Maysville, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/White_Oak_Gold_Grand_Opening_2025",
+      "url": "https://www.discgolfscene.com/tournaments/White_Oak_Gold_Grand_Opening_2026",
       "distance": 50,
       "isGVDG": false,
       "spots": null
     },
     {
-      "name": "Kings Cup XXI Pro/Am",
+      "name": "JDC of NC Membership Drive",
+      "date": "2026-01-25",
+      "city": "Jacksonville, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/JDC_of_NC_Membership_Drive_2026",
+      "distance": 50,
+      "isGVDG": false,
+      "spots": "13/72"
+    },
+    {
+      "name": "Kings Cup XXI Pro / Am driven by Innova",
       "date": "2026-01-31",
-      "venue": "Barnet Park",
       "city": "Kinston, NC",
       "tier": "B",
-      "url": "https://www.discgolfscene.com/tournaments/Kings_Cup_XX_Pro_Am_2026",
+      "url": "https://www.discgolfscene.com/tournaments/Kings_Cup_XXI_Pro_Am_2026",
       "distance": 28,
       "isGVDG": false,
-      "spots": "37/90"
+      "spots": "90/90"
     },
     {
       "name": "16th Annual Rocky Mount Ice Bowl",
       "date": "2026-02-07",
-      "venue": "Battle Park DGC",
       "city": "Rocky Mount, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/16th_Annual_Rocky_Mount_Ice_Bowl_2026",
       "distance": 40,
       "isGVDG": false,
-      "spots": "5/72"
+      "spots": "11/72"
     },
     {
-      "name": "The Joel Smith Memorial Birdie Shootout Finale",
-      "date": "2026-09-12",
-      "venue": "Barnet Park",
+      "name": "2026 Ayden Founders' Day Classic - Sponsored by Climo Disc Golf",
+      "date": "2026-02-07",
+      "city": "Ayden, NC",
+      "tier": "XC",
+      "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Day_Classic",
+      "distance": 10,
+      "isGVDG": true,
+      "spots": "18/72"
+    },
+    {
+      "name": "OFDA February Monthly",
+      "date": "2026-02-15",
+      "city": "Richlands, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/OFDA_February_Monthly_2026",
+      "distance": 55,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
+      "name": "The Barnet Brawl",
+      "date": "2026-02-28",
       "city": "Kinston, NC",
       "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/The_Joel_Smith_Memorial_Finale_2026",
+      "url": "https://www.discgolfscene.com/tournaments/The_Barnet_Brawl_2026",
+      "distance": 28,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
+      "name": "Spring Break Flex 2026",
+      "date": "2026-03-06",
+      "city": "Rocky Mount, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/Spring_Break_Flex_2026",
+      "distance": 40,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
+      "name": "Discraft Presents: Spike Hyzer's: North Carolina Disc Golf Championship XV",
+      "date": "2026-03-20",
+      "city": "Rocky Mount, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NC_Disc_Golf_Championship_XV_2026",
+      "distance": 40,
+      "isGVDG": false,
+      "spots": "35/244"
+    },
+    {
+      "name": "Lancer Chain Chaser 9",
+      "date": "2026-04-12",
+      "city": "Kinston, NC",
+      "tier": "XC",
+      "url": "https://www.discgolfscene.com/tournaments/Lancer_Chain_Chaser_9_2026",
+      "distance": 28,
+      "isGVDG": false,
+      "spots": "5/95"
+    },
+    {
+      "name": "Crom Transmission & Automotive Specialist Presents The 6th Annual Kinston Open",
+      "date": "2026-07-17",
+      "city": "Kinston, NC",
+      "tier": "Other",
+      "url": "https://www.discgolfscene.com/tournaments/6th_Annual_Kinston_Open_2026",
+      "distance": 28,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
+      "name": "Bill Fay Clubs and Dubs",
+      "date": "2026-08-29",
+      "city": "Kinston, NC",
+      "tier": "Doubles",
+      "url": "https://www.discgolfscene.com/tournaments/Bill_Fay_Clubs_and_Dubs_2026",
+      "distance": 28,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
+      "name": "The Joel Smith Memorial Birdie Shootout **Finale**",
+      "date": "2026-09-12",
+      "city": "Kinston, NC",
+      "tier": "Other",
+      "url": "https://www.discgolfscene.com/tournaments/Joel_Smith_Memorial_Birdie_Shootout_Finale_2026",
+      "distance": 28,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
+      "name": "Scorpion Disc Golf Match Play Invitational",
+      "date": "2026-12-12",
+      "city": "Kinston, NC",
+      "tier": "Other",
+      "url": "https://www.discgolfscene.com/tournaments/Scorpion_DG_Match_Play_Invitational_2026",
       "distance": 28,
       "isGVDG": false,
       "spots": null
