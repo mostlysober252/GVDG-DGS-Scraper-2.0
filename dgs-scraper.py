@@ -1,544 +1,436 @@
-// ============================================
-// Tournament Feed from Disc Golf Scene
-// OPTIMIZED VERSION - v2.0
-// ============================================
-// 
-// IMPROVEMENTS OVER ORIGINAL:
-// ✓ Consistent date handling (fixes timezone bugs)
-// ✓ Retry logic with exponential backoff
-// ✓ Smarter cache validation
-// ✓ Error state UI for users
-// ✓ Request timeout protection
-// ✓ Background cache refresh
-// ✓ Performance optimizations (Map lookups, single-pass filtering)
-// ✓ Better debugging with data source indicators
-//
-// ============================================
+#!/usr/bin/env python3
+"""
+GVDG Tournament Scraper v2.0
+Scrapes tournaments from Disc Golf Scene within 60 miles of Greenville, NC
 
-(function() {
-    'use strict';
+This script is designed to run via GitHub Actions on a schedule.
+It outputs tournaments.json which is consumed by the GVDG website.
+
+Usage:
+    python dgs-scraper.py
+
+Output:
+    tournaments.json - JSON file with tournament data
+"""
+
+import json
+import re
+import sys
+from datetime import datetime, timedelta
+from urllib.parse import urlencode
+import time
+
+# Try to import requests, provide helpful error if missing
+try:
+    import requests
+except ImportError:
+    print("Error: 'requests' library not installed.")
+    print("Install with: pip install requests")
+    sys.exit(1)
+
+# Try to import BeautifulSoup, provide helpful error if missing
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    print("Error: 'beautifulsoup4' library not installed.")
+    print("Install with: pip install beautifulsoup4")
+    sys.exit(1)
+
+# ============================================
+# CONFIGURATION
+# ============================================
+CONFIG = {
+    # Search center point (Greenville, NC)
+    "location": {
+        "name": "Greenville, NC",
+        "latitude": 35.597011,
+        "longitude": -77.375799,
+        "zipcode": "27833"
+    },
     
-    // ============================================
-    // CONFIGURATION
-    // ============================================
-    const CONFIG = {
-        // Primary data URL (GitHub raw)
-        jsonUrl: 'https://raw.githubusercontent.com/mostlysober252/GVDG-DGS-Scraper-2.0/main/tournaments.json',
-        
-        // Cache settings
-        cacheHours: 6,
-        cacheKey: 'gvdg_tournaments_v2', // Changed key to avoid conflicts with old cache
-        
-        // Retry settings
-        maxRetries: 2,
-        retryDelayMs: 1000,
-        
-        // Request timeout (ms) - prevents hanging on slow connections
-        fetchTimeout: 8000
-    };
+    # Search radius in miles
+    "distance": 60,
     
-    // ============================================
-    // FALLBACK DATA
-    // Used when fetch fails and no cache exists
-    // ============================================
-    const FALLBACK_TOURNAMENTS = [
-        {
-            name: "The Hangover 6 (Morning)",
-            date: "2026-01-01",
-            venue: "West Meadowbrook Park",
-            city: "Greenville, NC",
-            tier: "C",
-            url: "https://www.discgolfscene.com/tournaments/The_Hangover_6_2026",
-            distance: 0,
-            isGVDG: true,
-            spots: "12/72"
-        },
-        {
-            name: "The Hangover 7 (Afternoon)",
-            date: "2026-01-01",
-            venue: "West Meadowbrook Park",
-            city: "Greenville, NC",
-            tier: "C",
-            url: "https://www.discgolfscene.com/tournaments/The_Hangover_7_2026",
-            distance: 0,
-            isGVDG: true,
-            spots: "10/72"
-        },
-        {
-            name: "GVDG Frozen Bowl and Chili Cookoff",
-            date: "2026-01-24",
-            venue: "Farmville Municipal DGC",
-            city: "Farmville, NC",
-            tier: "Other",
-            url: "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
-            distance: 10,
-            isGVDG: true,
-            spots: null
-        },
-        {
-            name: "Kings Cup XXI Pro/Am",
-            date: "2026-01-31",
-            venue: "Barnet Park",
-            city: "Kinston, NC",
-            tier: "B",
-            url: "https://www.discgolfscene.com/tournaments/Kings_Cup_XX_Pro_Am_2026",
-            distance: 28,
-            isGVDG: false,
-            spots: "37/90"
-        },
-        {
-            name: "16th Annual Rocky Mount Ice Bowl",
-            date: "2026-02-07",
-            venue: "Battle Park DGC",
-            city: "Rocky Mount, NC",
-            tier: "Other",
-            url: "https://www.discgolfscene.com/tournaments/16th_Annual_Rocky_Mount_Ice_Bowl_2026",
-            distance: 40,
-            isGVDG: false,
-            spots: "5/72"
-        }
-    ];
+    # Tournament formats to include (s=singles, d=doubles, t=teams)
+    "formats": ["s", "d", "t"],
     
-    // ============================================
-    // DOM ELEMENTS (cached for performance)
-    // ============================================
-    const grid = document.getElementById('tournamentGrid');
-    const filterBtns = document.querySelectorAll('.filter-tab');
+    # GVDG-hosted tournament identifiers (case-insensitive partial matches)
+    "gvdg_keywords": [
+        "gvdg",
+        "greenville valley",
+        "hangover",  # The Hangover tournaments
+        "chili bowl",
+        "frozen bowl",
+        "ayden founders"  # GVDG helps organize this one
+    ],
     
-    // ============================================
-    // STATE
-    // ============================================
-    let tournaments = [];
-    let currentFilter = 'all';
-    let lastUpdated = null;
-    let dataSource = 'none'; // 'live', 'cache', 'fallback'
+    # Request settings
+    "timeout": 30,
+    "retry_attempts": 3,
+    "retry_delay": 2,
     
-    // ============================================
-    // DATE UTILITIES
-    // Key fix: Consistent date handling prevents timezone bugs
-    // ============================================
-    
-    /**
-     * Normalize date string to start of day (midnight)
-     * This fixes the bug where tournaments on "today" could be
-     * incorrectly marked as past due to time comparison
-     */
-    function normalizeDate(dateStr) {
-        const date = new Date(dateStr + 'T00:00:00');
-        date.setHours(0, 0, 0, 0);
-        return date;
+    # Output file
+    "output_file": "tournaments.json"
+}
+
+# Base URL for Disc Golf Scene
+DGS_BASE_URL = "https://www.discgolfscene.com"
+DGS_SEARCH_URL = f"{DGS_BASE_URL}/tournaments/search"
+
+
+def build_search_url():
+    """Build the search URL with all parameters."""
+    params = {
+        "filter[location][country]": "USA",
+        "filter[location][name]": CONFIG["location"]["name"],
+        "filter[location][latitude]": CONFIG["location"]["latitude"],
+        "filter[location][longitude]": CONFIG["location"]["longitude"],
+        "filter[location][distance]": CONFIG["distance"],
+        "filter[location][units]": "mi",
+        "filter[location][zipcode]": CONFIG["location"]["zipcode"],
     }
     
-    /**
-     * Get today's date normalized to midnight
-     */
-    function getToday() {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        return today;
+    # Add format filters
+    for i, fmt in enumerate(CONFIG["formats"]):
+        params[f"filter[format][{i}]"] = fmt
+    
+    return f"{DGS_SEARCH_URL}?{urlencode(params)}"
+
+
+def fetch_page(url, attempt=1):
+    """Fetch a page with retry logic."""
+    headers = {
+        "User-Agent": "GVDG Tournament Scraper/2.0 (https://github.com/mostlysober252/GVDG-DGS-Scraper-2.0)",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
     }
     
-    /**
-     * Check if a tournament date is in the past
-     * Uses normalized dates for consistent comparison
-     */
-    function isPastTournament(dateStr) {
-        return normalizeDate(dateStr) < getToday();
+    try:
+        print(f"  Fetching: {url[:80]}...")
+        response = requests.get(url, headers=headers, timeout=CONFIG["timeout"])
+        response.raise_for_status()
+        return response.text
+    except requests.RequestException as e:
+        if attempt < CONFIG["retry_attempts"]:
+            print(f"  Retry {attempt}/{CONFIG['retry_attempts']} after error: {e}")
+            time.sleep(CONFIG["retry_delay"])
+            return fetch_page(url, attempt + 1)
+        else:
+            print(f"  Failed after {CONFIG['retry_attempts']} attempts: {e}")
+            raise
+
+
+def parse_date(date_text):
+    """
+    Parse date text from DGS format to ISO date string.
+    Handles formats like:
+    - "Sat, Jan 24, 2026"
+    - "Sat-Sun, Jan 31-Feb 1, 2026"
+    - "Fri-Sun, Mar 20-22, 2026"
+    
+    Returns the START date in YYYY-MM-DD format.
+    """
+    # Clean up the text
+    date_text = date_text.strip()
+    
+    # Remove day-of-week prefix (e.g., "Sat, " or "Sat-Sun, ")
+    date_text = re.sub(r'^[A-Za-z]{3}(-[A-Za-z]{3})?,\s*', '', date_text)
+    
+    # Handle multi-day formats like "Jan 31-Feb 1, 2026" or "Mar 20-22, 2026"
+    # Extract just the start date
+    
+    # Pattern for "Month Day-Day, Year" (same month)
+    match = re.match(r'([A-Za-z]{3})\s+(\d{1,2})-\d{1,2},\s*(\d{4})', date_text)
+    if match:
+        month, day, year = match.groups()
+        date_text = f"{month} {day}, {year}"
+    
+    # Pattern for "Month Day-Month Day, Year" (different months)
+    match = re.match(r'([A-Za-z]{3})\s+(\d{1,2})-[A-Za-z]{3}\s+\d{1,2},\s*(\d{4})', date_text)
+    if match:
+        month, day, year = match.groups()
+        date_text = f"{month} {day}, {year}"
+    
+    # Now parse the cleaned date
+    try:
+        # Try "Mon DD, YYYY" format
+        dt = datetime.strptime(date_text.strip(), "%b %d, %Y")
+        return dt.strftime("%Y-%m-%d")
+    except ValueError:
+        pass
+    
+    try:
+        # Try "Month DD, YYYY" format (full month name)
+        dt = datetime.strptime(date_text.strip(), "%B %d, %Y")
+        return dt.strftime("%Y-%m-%d")
+    except ValueError:
+        pass
+    
+    print(f"  Warning: Could not parse date '{date_text}'")
+    return None
+
+
+def extract_tier(text):
+    """Extract PDGA tier from tournament text."""
+    text = text.upper()
+    
+    if "A-TIER" in text:
+        return "A"
+    elif "B-TIER" in text:
+        return "B"
+    elif "C-TIER" in text or "C/B-TIER" in text:
+        return "C"
+    elif "XC-TIER" in text:
+        return "XC"
+    elif "LEAGUE" in text:
+        return "League"
+    elif "DOUBLES" in text:
+        return "Doubles"
+    else:
+        return "Other"
+
+
+def extract_distance(text):
+    """Extract distance in miles from tournament listing."""
+    # Look for patterns like "~45 mi" or "45mi" or "45 miles"
+    match = re.search(r'~?(\d+)\s*mi', text, re.IGNORECASE)
+    if match:
+        return int(match.group(1))
+    return 0
+
+
+def extract_spots(text):
+    """Extract registration spots info like '10/72' or '90/90'."""
+    match = re.search(r'(\d+)\s*/\s*(\d+)', text)
+    if match:
+        return f"{match.group(1)}/{match.group(2)}"
+    return None
+
+
+def is_gvdg_tournament(name):
+    """Check if tournament is GVDG-hosted based on name."""
+    name_lower = name.lower()
+    return any(keyword in name_lower for keyword in CONFIG["gvdg_keywords"])
+
+
+def calculate_distance(city):
+    """
+    Calculate approximate distance from Greenville, NC to a city.
+    This is a rough estimate based on known distances.
+    For production, you'd want to use a geocoding API.
+    """
+    # Known distances from Greenville, NC (approximate)
+    known_distances = {
+        "greenville": 0,
+        "farmville": 10,
+        "ayden": 10,
+        "winterville": 5,
+        "kinston": 28,
+        "rocky mount": 40,
+        "wilson": 35,
+        "jacksonville": 50,
+        "richlands": 55,
+        "maysville": 50,
+        "new bern": 40,
+        "zebulon": 55,
+        "raleigh": 80,
+        "goldsboro": 45,
     }
     
-    /**
-     * Format date for display in tournament cards
-     */
-    function formatDate(dateStr) {
-        const date = normalizeDate(dateStr);
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return {
-            day: date.getDate(),
-            month: months[date.getMonth()],
-            year: date.getFullYear()
-        };
-    }
+    city_lower = city.lower()
+    for known_city, distance in known_distances.items():
+        if known_city in city_lower:
+            return distance
     
-    // ============================================
-    // TIER UTILITIES
-    // Using Map for O(1) lookups instead of object
-    // ============================================
-    const tierClassMap = new Map([
-        ['A', 'tier-a'],
-        ['B', 'tier-b'],
-        ['C', 'tier-c'],
-        ['XC', 'tier-xc'],
-        ['League', 'tier-league'],
-        ['Doubles', 'tier-other'],
-        ['Other', 'tier-other']
-    ]);
+    # Default to middle of search radius if unknown
+    return 30
+
+
+def parse_tournaments(html):
+    """Parse tournament listings from HTML."""
+    soup = BeautifulSoup(html, 'html.parser')
+    tournaments = []
     
-    function getTierClass(tier) {
-        return tierClassMap.get(tier) || 'tier-other';
-    }
+    # Find all tournament entries
+    # DGS uses various structures, so we need to be flexible
     
-    function getTierLabel(tier) {
-        if (tier === 'Other' || tier === 'Doubles') return tier;
-        if (tier === 'XC') return 'XC-Tier';
-        return tier + '-Tier';
-    }
+    # Look for tournament links/cards
+    tournament_elements = soup.find_all('a', href=re.compile(r'/tournaments/[^/]+$'))
     
-    // ============================================
-    // UI RENDERING
-    // ============================================
+    seen_urls = set()
     
-    function showLoading() {
-        grid.innerHTML = `
-            <div class="tournament-loading" style="grid-column: 1 / -1;">
-                <div class="spinner"></div>
-                <p>Loading tournaments...</p>
-            </div>
-        `;
-    }
-    
-    /**
-     * NEW: Show error state to users
-     * Original version had no error UI
-     */
-    function showError(message) {
-        grid.innerHTML = `
-            <div class="tournament-error" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
-                <p style="color: var(--primary); font-size: 1.5rem; margin-bottom: 0.5rem;">⚠️</p>
-                <p style="color: var(--text-secondary);">${message}</p>
-                <p style="margin-top: 1rem;">
-                    <a href="https://www.discgolfscene.com/tournaments/North_Carolina" 
-                       target="_blank" rel="noopener noreferrer" 
-                       style="color: var(--primary); text-decoration: underline;">
-                        Browse tournaments on Disc Golf Scene →
-                    </a>
-                </p>
-            </div>
-        `;
-    }
-    
-    /**
-     * Create tournament card HTML
-     * Optimized: pre-compute values outside template literal
-     */
-    function createTournamentCard(tournament) {
-        const dateInfo = formatDate(tournament.date);
-        const isPast = isPastTournament(tournament.date);
-        const spotsHTML = tournament.spots ? `<span class="tournament-spots">${tournament.spots}</span>` : '';
-        const tierLabel = tournament.isGVDG ? '⭐ GVDG' : getTierLabel(tournament.tier);
-        
-        return `
-            <div class="tournament-card ${isPast ? 'past' : ''}" onclick="window.open('${tournament.url}', '_blank')">
-                <div class="tournament-card-header">
-                    <div class="tournament-date-badge">
-                        <div class="day">${dateInfo.day}</div>
-                        <div class="month">${dateInfo.month}</div>
-                        <div class="year">${dateInfo.year}</div>
-                    </div>
-                    <div class="tournament-details">
-                        <h4 class="tournament-name">${tournament.name}</h4>
-                        <p class="tournament-location">📍 ${tournament.city}</p>
-                    </div>
-                </div>
-                <div class="tournament-card-footer">
-                    <span class="tournament-tier ${getTierClass(tournament.tier)}">${tierLabel}</span>
-                    <span class="tournament-distance">~${tournament.distance} mi</span>
-                    ${spotsHTML}
-                </div>
-                <a href="${tournament.url}" target="_blank" rel="noopener noreferrer" class="tournament-card-link" onclick="event.stopPropagation()">
-                    View on Disc Golf Scene →
-                </a>
-            </div>
-        `;
-    }
-    
-    // ============================================
-    // FILTERING & RENDERING
-    // ============================================
-    
-    /**
-     * Filter tournaments based on selected category
-     * Optimized: Single-pass filter combining date check and category
-     */
-    function filterTournaments(filter) {
-        const today = getToday();
-        
-        // Single-pass filter (more efficient than multiple filters)
-        let filtered = tournaments.filter(t => {
-            // Filter out past tournaments (using consistent date comparison)
-            if (normalizeDate(t.date) < today) return false;
+    for elem in tournament_elements:
+        try:
+            # Get the tournament URL
+            url = elem.get('href', '')
+            if not url or url in seen_urls:
+                continue
             
-            // Apply category filter
-            if (filter === 'gvdg') return t.isGVDG;
-            if (filter === 'pdga') return ['A', 'B', 'C', 'XC'].includes(t.tier);
-            return true; // 'all' filter
-        });
-        
-        // Sort by date (ascending)
-        filtered.sort((a, b) => normalizeDate(a.date) - normalizeDate(b.date));
-        
-        return filtered;
-    }
-    
-    function renderTournaments(filter = 'all') {
-        const filtered = filterTournaments(filter);
-        
-        if (filtered.length === 0) {
-            grid.innerHTML = `
-                <div class="no-tournaments" style="grid-column: 1 / -1;">
-                    <p>No upcoming tournaments found for this filter.</p>
-                    <p style="margin-top: 0.5rem;">
-                        <a href="https://www.discgolfscene.com/tournaments/North_Carolina" 
-                           target="_blank" rel="noopener noreferrer" style="color: var(--primary);">
-                            Browse all NC tournaments on Disc Golf Scene →
-                        </a>
-                    </p>
-                </div>
-            `;
-        } else {
-            // Build HTML in one go (more efficient than multiple DOM updates)
-            grid.innerHTML = filtered.map(createTournamentCard).join('');
-        }
-    }
-    
-    // ============================================
-    // CACHING (Enhanced)
-    // ============================================
-    
-    /**
-     * Get cached data with validation
-     * Enhanced: Validates data structure, clears corrupted cache
-     */
-    function getCachedData() {
-        try {
-            const cached = localStorage.getItem(CONFIG.cacheKey);
-            if (!cached) return null;
+            # Make URL absolute
+            if url.startswith('/'):
+                url = DGS_BASE_URL + url
             
-            const data = JSON.parse(cached);
+            seen_urls.add(url)
             
-            // Check cache age
-            const cacheAgeHours = (Date.now() - data.cachedAt) / (1000 * 60 * 60);
-            if (cacheAgeHours >= CONFIG.cacheHours) {
-                console.log('📦 Cache expired');
-                return null;
+            # Get the parent container for more context
+            parent = elem.find_parent(['div', 'li', 'article']) or elem
+            parent_text = parent.get_text(separator=' ', strip=True)
+            
+            # Extract tournament name
+            name = elem.get_text(strip=True)
+            if not name or len(name) < 3:
+                continue
+            
+            # Skip non-tournament links
+            skip_keywords = ['privacy', 'terms', 'help', 'contact', 'sign in', 'classic version']
+            if any(kw in name.lower() for kw in skip_keywords):
+                continue
+            
+            # Extract date from parent context
+            date_match = re.search(
+                r'((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun))?,\s*)?'
+                r'([A-Za-z]{3})\s+(\d{1,2})(?:-(?:[A-Za-z]{3}\s+)?\d{1,2})?,\s*(\d{4})',
+                parent_text
+            )
+            
+            if not date_match:
+                continue
+            
+            date_str = date_match.group(0)
+            parsed_date = parse_date(date_str)
+            
+            if not parsed_date:
+                continue
+            
+            # Extract city/location
+            city_match = re.search(r'([A-Za-z\s]+),\s*(NC|North Carolina)', parent_text)
+            city = city_match.group(1).strip() + ", NC" if city_match else "NC"
+            
+            # Extract other info
+            tier = extract_tier(parent_text)
+            spots = extract_spots(parent_text)
+            distance = calculate_distance(city)
+            is_gvdg = is_gvdg_tournament(name)
+            
+            tournament = {
+                "name": name,
+                "date": parsed_date,
+                "city": city,
+                "tier": tier,
+                "url": url,
+                "distance": distance,
+                "isGVDG": is_gvdg,
+                "spots": spots
             }
             
-            // Validate data structure
-            if (!Array.isArray(data.tournaments) || data.tournaments.length === 0) {
-                console.warn('⚠️ Invalid cache data structure');
-                return null;
-            }
+            tournaments.append(tournament)
+            print(f"  Found: {name} ({parsed_date}) - {city}")
             
-            return data;
-        } catch (e) {
-            console.warn('⚠️ Cache read error:', e);
-            // Clear corrupted cache
-            try { localStorage.removeItem(CONFIG.cacheKey); } catch {}
-            return null;
-        }
+        except Exception as e:
+            print(f"  Error parsing tournament element: {e}")
+            continue
+    
+    return tournaments
+
+
+def deduplicate_tournaments(tournaments):
+    """Remove duplicate tournaments based on URL."""
+    seen = set()
+    unique = []
+    
+    for t in tournaments:
+        if t['url'] not in seen:
+            seen.add(t['url'])
+            unique.append(t)
+    
+    return unique
+
+
+def sort_tournaments(tournaments):
+    """Sort tournaments by date."""
+    return sorted(tournaments, key=lambda t: t['date'])
+
+
+def filter_future_tournaments(tournaments, days_back=1):
+    """Filter to only include future tournaments (with grace period)."""
+    cutoff = datetime.now() - timedelta(days=days_back)
+    cutoff_str = cutoff.strftime("%Y-%m-%d")
+    
+    return [t for t in tournaments if t['date'] >= cutoff_str]
+
+
+def main():
+    """Main scraper function."""
+    print("=" * 60)
+    print("GVDG Tournament Scraper v2.0")
+    print("=" * 60)
+    print(f"Location: {CONFIG['location']['name']}")
+    print(f"Radius: {CONFIG['distance']} miles")
+    print(f"Formats: {', '.join(CONFIG['formats'])}")
+    print()
+    
+    # Build search URL
+    search_url = build_search_url()
+    print(f"Search URL:\n{search_url}\n")
+    
+    # Fetch the search results page
+    print("Fetching tournaments...")
+    try:
+        html = fetch_page(search_url)
+    except Exception as e:
+        print(f"FATAL: Could not fetch search page: {e}")
+        sys.exit(1)
+    
+    # Parse tournaments
+    print("\nParsing tournaments...")
+    tournaments = parse_tournaments(html)
+    
+    # Deduplicate
+    tournaments = deduplicate_tournaments(tournaments)
+    
+    # Filter to future tournaments
+    tournaments = filter_future_tournaments(tournaments)
+    
+    # Sort by date
+    tournaments = sort_tournaments(tournaments)
+    
+    print(f"\nFound {len(tournaments)} upcoming tournaments")
+    
+    # Build output data
+    output = {
+        "lastUpdated": datetime.now().isoformat(),
+        "searchCenter": CONFIG["location"]["name"],
+        "searchRadius": CONFIG["distance"],
+        "tournaments": tournaments
     }
     
-    /**
-     * Save data to cache
-     */
-    function setCachedData(data) {
-        try {
-            const cacheData = {
-                tournaments: data.tournaments,
-                lastUpdated: data.lastUpdated,
-                cachedAt: Date.now()
-            };
-            localStorage.setItem(CONFIG.cacheKey, JSON.stringify(cacheData));
-        } catch (e) {
-            console.warn('⚠️ Cache write error:', e);
-        }
-    }
+    # Write to file
+    output_file = CONFIG["output_file"]
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
     
-    // ============================================
-    // DATA FETCHING (Enhanced with retry & timeout)
-    // ============================================
+    print(f"\nWrote {len(tournaments)} tournaments to {output_file}")
     
-    /**
-     * NEW: Fetch with timeout protection
-     * Prevents hanging on slow/unresponsive servers
-     */
-    async function fetchWithTimeout(url, timeoutMs) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-        
-        try {
-            const response = await fetch(url, { signal: controller.signal });
-            clearTimeout(timeoutId);
-            return response;
-        } catch (error) {
-            clearTimeout(timeoutId);
-            throw error;
-        }
-    }
+    # Print summary
+    print("\n" + "=" * 60)
+    print("TOURNAMENT SUMMARY")
+    print("=" * 60)
     
-    /**
-     * NEW: Fetch with exponential backoff retry
-     * Handles transient network failures gracefully
-     */
-    async function fetchWithRetry(url, retries = CONFIG.maxRetries) {
-        let lastError;
-        
-        for (let attempt = 0; attempt <= retries; attempt++) {
-            try {
-                if (attempt > 0) {
-                    // Exponential backoff: 1s, 2s, 4s...
-                    const delay = CONFIG.retryDelayMs * Math.pow(2, attempt - 1);
-                    console.log(`🔄 Retry attempt ${attempt} after ${delay}ms`);
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                }
-                
-                const response = await fetchWithTimeout(url, CONFIG.fetchTimeout);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                return await response.json();
-            } catch (error) {
-                lastError = error;
-                console.warn(`❌ Fetch attempt ${attempt + 1} failed:`, error.message);
-            }
-        }
-        
-        throw lastError;
-    }
+    gvdg_count = sum(1 for t in tournaments if t['isGVDG'])
+    print(f"Total: {len(tournaments)}")
+    print(f"GVDG Events: {gvdg_count}")
+    print()
     
-    /**
-     * Main load function
-     * Strategy: Cache → Fresh fetch → Fallback
-     */
-    async function loadTournaments() {
-        showLoading();
-        
-        // 1. Check cache first (fast path)
-        const cached = getCachedData();
-        if (cached) {
-            console.log('✅ Using cached tournament data');
-            tournaments = cached.tournaments;
-            lastUpdated = cached.lastUpdated;
-            dataSource = 'cache';
-            initializeUI();
-            
-            // Background refresh if cache is getting stale (>50% of cache lifetime)
-            const cacheAgeHours = (Date.now() - cached.cachedAt) / (1000 * 60 * 60);
-            if (cacheAgeHours > CONFIG.cacheHours * 0.5) {
-                console.log('📦 Cache getting stale, refreshing in background...');
-                backgroundRefresh();
-            }
-            return;
-        }
-        
-        // 2. Try to fetch fresh data
-        try {
-            const data = await fetchWithRetry(CONFIG.jsonUrl);
-            
-            if (!data.tournaments || !Array.isArray(data.tournaments)) {
-                throw new Error('Invalid data format');
-            }
-            
-            tournaments = data.tournaments;
-            lastUpdated = data.lastUpdated;
-            dataSource = 'live';
-            
-            // Cache the fresh data
-            setCachedData(data);
-            
-            console.log(`✅ Loaded ${tournaments.length} tournaments from live JSON`);
-        } catch (error) {
-            console.warn('❌ Failed to load tournaments.json:', error.message);
-            
-            // 3. Use fallback data
-            tournaments = FALLBACK_TOURNAMENTS;
-            lastUpdated = null;
-            dataSource = 'fallback';
-            
-            console.log('⚠️ Using fallback tournament data');
-        }
-        
-        initializeUI();
-    }
+    for t in tournaments[:10]:  # Show first 10
+        gvdg_marker = "⭐ " if t['isGVDG'] else "   "
+        print(f"{gvdg_marker}{t['date']} | {t['name'][:40]:<40} | {t['city']}")
     
-    /**
-     * NEW: Background refresh without blocking UI
-     * Updates cache silently for next page load
-     */
-    async function backgroundRefresh() {
-        try {
-            const data = await fetchWithRetry(CONFIG.jsonUrl);
-            if (data.tournaments && Array.isArray(data.tournaments)) {
-                setCachedData(data);
-                console.log('✅ Background cache refresh complete');
-            }
-        } catch (error) {
-            console.warn('⚠️ Background refresh failed:', error.message);
-        }
-    }
+    if len(tournaments) > 10:
+        print(f"   ... and {len(tournaments) - 10} more")
     
-    // ============================================
-    // INITIALIZATION
-    // ============================================
-    
-    function initializeUI() {
-        // Render tournaments
-        renderTournaments(currentFilter);
-        
-        // Setup filter buttons
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                renderTournaments(currentFilter);
-            });
-        });
-        
-        // Add data freshness note
-        updateFreshnessNote();
-    }
-    
-    /**
-     * Enhanced: Shows data source indicator for debugging
-     */
-    function updateFreshnessNote() {
-        const feedHeader = document.querySelector('.tournament-feed-header');
-        if (!feedHeader) return;
-        
-        // Remove any existing note
-        const existingNote = feedHeader.querySelector('.data-freshness-note');
-        if (existingNote) existingNote.remove();
-        
-        // Build note
-        const note = document.createElement('p');
-        note.className = 'data-freshness-note';
-        note.style.cssText = 'font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; opacity: 0.7;';
-        
-        let noteText = 'Data from <a href="https://www.discgolfscene.com" target="_blank" rel="noopener noreferrer" style="color: var(--primary);">discgolfscene.com</a>.';
-        
-        if (lastUpdated) {
-            const updated = new Date(lastUpdated);
-            noteText += ` Last updated: ${updated.toLocaleDateString()}.`;
-        }
-        
-        // Data source indicator (helpful for debugging)
-        if (dataSource === 'cache') {
-            noteText += ' <span title="Data loaded from browser cache">📦</span>';
-        } else if (dataSource === 'fallback') {
-            noteText += ' <span title="Using backup data - live feed unavailable" style="color: var(--accent);">⚠️ Backup data</span>';
-        }
-        
-        noteText += ' For current info, visit event pages directly.';
-        note.innerHTML = noteText;
-        
-        const headerDiv = feedHeader.querySelector('div');
-        if (headerDiv) headerDiv.appendChild(note);
-    }
-    
-    // ============================================
-    // START
-    // ============================================
-    loadTournaments();
-})();
+    print("\nDone!")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
