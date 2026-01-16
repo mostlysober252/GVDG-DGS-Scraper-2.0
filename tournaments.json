@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-15T19:06:05.413108",
+  "lastUpdated": "2026-01-16T03:56:09.516505",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
@@ -14,7 +14,7 @@
       "spots": "11/72"
     },
     {
-      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC11C-tier",
+      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC21C-tier",
       "date": "2026-01-19",
       "city": "The Z at Zebulon Community Park Zebulon, NC",
       "tier": "C",
@@ -84,6 +84,16 @@
       "spots": "18/72"
     },
     {
+      "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2Doubles",
+      "date": "2026-02-08",
+      "city": "North Recreational Complex Greenville, NC",
+      "tier": "Doubles",
+      "url": "https://www.discgolfscene.com/tournaments/Scallywag_Showdown_USDGC_DUBS_QUALIFIER_2026",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": null
+    },
+    {
       "name": "Feb15SunOFDA February MonthlyPDGA C-tier · Sun, Feb 15, 2026Richlands-Steed ParkRichlands, NC41C-tier",
       "date": "2026-02-15",
       "city": "Steed Park Richlands, NC",
@@ -114,14 +124,14 @@
       "spots": null
     },
     {
-      "name": "Mar20-22Fri-SunDiscraft Presents: Spike Hyzer's: North Carolina Disc Golf Championship XV Supported By Grip EQ.PDGA A-tier · Fri-Sun, Mar 20-22, 2026Sunset ParkRocky Mount, NC35 / 2443A-tier",
+      "name": "Mar20-22Fri-SunDiscraft Presents: Spike Hyzer's: North Carolina Disc Golf Championship XV Supported By Grip EQ.PDGA A-tier · Fri-Sun, Mar 20-22, 2026Sunset ParkRocky Mount, NC38 / 2443A-tier",
       "date": "2026-03-20",
       "city": "Sunset Park Rocky Mount, NC",
       "tier": "A",
       "url": "https://www.discgolfscene.com/tournaments/Discraft_Presents_Spike_Hyzers_North_Carolina_Disc_Golf_Championship_XV_Supported_By_Grip_EQ_2026",
       "distance": 40,
       "isGVDG": false,
-      "spots": "35/244"
+      "spots": "38/244"
     },
     {
       "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC5 / 952Sun, Jan 18 at 6:00pm                        ESTXC-tier",
@@ -132,6 +142,16 @@
       "distance": 28,
       "isGVDG": false,
       "spots": "5/95"
+    },
+    {
+      "name": "May9SatSchool’s Out Flex 2026PDGA Flex C-tier · Sat, May 9, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startWed, Apr 1 at 8:00pm                        EDTC-tier",
+      "date": "2026-05-09",
+      "city": "North Carolina Wesleyan University Rocky Mount, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/School_s_Out_Flex_2026",
+      "distance": 40,
+      "isGVDG": false,
+      "spots": null
     },
     {
       "name": "Jul17-19Fri-SunCrom Transmission & Automotive Specialist Presents The 6th Annual Kinston Open Supported By InnovaFri-Sun, Jul 17-19, 2026Kinston Country Club Temp courseKinston, NCWed, Apr 8 at 8:00pm                        EDT",
