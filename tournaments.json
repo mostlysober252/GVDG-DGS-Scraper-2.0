@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-17T13:36:32.188327",
+  "lastUpdated": "2026-01-17T18:52:29.803958",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
@@ -11,7 +11,7 @@
       "url": "https://www.discgolfscene.com/tournaments/search-filter",
       "distance": 0,
       "isGVDG": false,
-      "spots": "11/72"
+      "spots": "12/72"
     },
     {
       "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC61C-tier",
@@ -24,14 +24,14 @@
       "spots": null
     },
     {
-      "name": "Jan24Sat2026 GVDG Chili BowlPDGA XC-tier · Sat, Jan 24, 2026Farmville Municipal DGCFarmville, NC11 / 721XC-tier",
+      "name": "Jan24Sat2026 GVDG Chili BowlPDGA XC-tier · Sat, Jan 24, 2026Farmville Municipal DGCFarmville, NC12 / 721XC-tier",
       "date": "2026-01-24",
       "city": "Farmville Municipal DGC Farmville, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
       "distance": 10,
       "isGVDG": true,
-      "spots": "11/72"
+      "spots": "12/72"
     },
     {
       "name": "Jan24SatWhite Oak Gold Grand OpeningSat, Jan 24, 2026White Oak River CampgroundMaysville, NC1",
@@ -64,24 +64,24 @@
       "spots": "90/90"
     },
     {
-      "name": "Feb7Sat16th Annual Rocky Mount Ice BowlSat, Feb 7, 2026Battle Park DGCRocky Mount, NC16 / 722",
+      "name": "Feb7Sat16th Annual Rocky Mount Ice BowlSat, Feb 7, 2026Battle Park DGCRocky Mount, NC17 / 722",
       "date": "2026-02-07",
       "city": "Battle Park DGC Rocky Mount, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/16th_Annual_Rocky_Mount_Ice_Bowl_2026",
       "distance": 40,
       "isGVDG": false,
-      "spots": "16/72"
+      "spots": "17/72"
     },
     {
-      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC19 / 722XC-tier",
+      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC20 / 722XC-tier",
       "date": "2026-02-07",
       "city": "Ayden District Park Ayden, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Classic_2026",
       "distance": 10,
       "isGVDG": true,
-      "spots": "19/72"
+      "spots": "20/72"
     },
     {
       "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2Doubles",
