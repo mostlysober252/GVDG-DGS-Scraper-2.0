@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-17T18:52:29.803958",
+  "lastUpdated": "2026-01-18T04:02:21.156070",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
@@ -14,7 +14,7 @@
       "spots": "12/72"
     },
     {
-      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC61C-tier",
+      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC81C-tier",
       "date": "2026-01-19",
       "city": "The Z at Zebulon Community Park Zebulon, NC",
       "tier": "C",
@@ -44,14 +44,14 @@
       "spots": null
     },
     {
-      "name": "Jan25SunJDC of NC Membership DrivePDGA C-tier · Sun, Jan 25, 2026Northeast Creek ParkJacksonville, NC13 / 721C-tier",
+      "name": "Jan25SunJDC of NC Membership DrivePDGA C-tier · Sun, Jan 25, 2026Northeast Creek ParkJacksonville, NC14 / 721C-tier",
       "date": "2026-01-25",
       "city": "Northeast Creek Park Jacksonville, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/JDC_of_NC_Membership_Drive_2026",
       "distance": 50,
       "isGVDG": false,
-      "spots": "13/72"
+      "spots": "14/72"
     },
     {
       "name": "Jan-Feb31-1Sat-SunKings Cup XXI Pro / Am driven by InnovaPDGA B-tier · Sat-Sun, Jan 31-Feb 1, 2026Barnet ParkKinston, NC90 / 903B-tier",
@@ -74,14 +74,14 @@
       "spots": "17/72"
     },
     {
-      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC20 / 722XC-tier",
+      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC21 / 722XC-tier",
       "date": "2026-02-07",
       "city": "Ayden District Park Ayden, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Classic_2026",
       "distance": 10,
       "isGVDG": true,
-      "spots": "20/72"
+      "spots": "21/72"
     },
     {
       "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2Doubles",
@@ -134,14 +134,14 @@
       "spots": "39/244"
     },
     {
-      "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC7 / 952Sun, Jan 18 at 6:00pm                        ESTXC-tier",
+      "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC9 / 952Sun, Jan 18 at 6:00pm                        ESTXC-tier",
       "date": "2026-04-12",
       "city": "Lenoir Community College Kinston, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Lancer_Chain_Chaser_9_2026",
       "distance": 28,
       "isGVDG": false,
-      "spots": "7/95"
+      "spots": "9/95"
     },
     {
       "name": "May9SatSchool’s Out Flex 2026PDGA Flex C-tier · Sat, May 9, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startWed, Apr 1 at 8:00pm                        EDTC-tier",
