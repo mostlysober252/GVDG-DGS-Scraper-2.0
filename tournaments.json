@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-19T04:18:24.902825",
+  "lastUpdated": "2026-01-19T07:19:56.174971",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
@@ -64,24 +64,24 @@
       "spots": "90/90"
     },
     {
-      "name": "Feb7Sat16th Annual Rocky Mount Ice BowlSat, Feb 7, 2026Battle Park DGCRocky Mount, NC18 / 722",
+      "name": "Feb7Sat16th Annual Rocky Mount Ice BowlSat, Feb 7, 2026Battle Park DGCRocky Mount, NC19 / 722",
       "date": "2026-02-07",
       "city": "Battle Park DGC Rocky Mount, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/16th_Annual_Rocky_Mount_Ice_Bowl_2026",
       "distance": 40,
       "isGVDG": false,
-      "spots": "18/72"
+      "spots": "19/72"
     },
     {
-      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC21 / 722XC-tier",
+      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC22 / 722XC-tier",
       "date": "2026-02-07",
       "city": "Ayden District Park Ayden, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Classic_2026",
       "distance": 10,
       "isGVDG": true,
-      "spots": "21/72"
+      "spots": "22/72"
     },
     {
       "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2Doubles",
