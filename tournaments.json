@@ -1,22 +1,1432 @@
 {
-  "lastUpdated": "2026-01-19T18:58:36.819031",
+  "lastUpdated": "2026-01-19T22:13:20.290379",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
     {
-      "name": "PDGAAll eventsWithin 60 miles of Greenville, NCAny formatAll upcoming",
+      "name": "My Tournaments",
       "date": "2026-01-19",
       "city": "miles of Greenville, NC",
       "tier": "A",
-      "url": "https://www.discgolfscene.com/tournaments/search-filter",
+      "url": "https://www.discgolfscene.com/tournaments/mine",
       "distance": 0,
       "isGVDG": false,
       "spots": "14/72"
     },
     {
-      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC431C-tier",
+      "name": "+ New tournament",
       "date": "2026-01-19",
-      "city": "The Z at Zebulon Community Park Zebulon, NC",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/new",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Alberta",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AB",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "British Columbia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/BC",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Manitoba",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MB",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "New Brunswick",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NB",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Newfoundland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NL",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Nova Scotia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NS",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Ontario",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/ON",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Prince Edward Island",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/PE",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Quebec",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/QC",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Saskatchewan",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/SK",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Yukon Territory",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/YT",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "AA Armed Forces",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "AE Armed Forces",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AE",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Alabama",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AL",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Alaska",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AK",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "AP Armed Forces",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AP",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Arizona",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AZ",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Arkansas",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/AR",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "California",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/CA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Colorado",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/CO",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Connecticut",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/CT",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "District of Columbia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/DC",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Delaware",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/DE",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Florida",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/FL",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Georgia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/GA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Hawaii",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/HI",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Idaho",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/ID",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Illinois",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/IL",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Indiana",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/IN",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Kansas",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/KS",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Kentucky",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/KY",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Louisiana",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/LA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Maine",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/ME",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Maryland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MD",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Massachusetts",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Michigan",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MI",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Minnesota",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MN",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Mississippi",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MS",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Missouri",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MO",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Montana",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/MT",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Nebraska",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NE",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Nevada",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NV",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "New Hampshire",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NH",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "New Jersey",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NJ",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "New Mexico",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NM",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "New York",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NY",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "North Carolina",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/NC",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "North Dakota",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/ND",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Oklahoma",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/OK",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Oregon",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/OR",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Pennsylvania",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/PA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Puerto Rico",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/PR",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Rhode Island",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/RI",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "South Carolina",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/SC",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "South Dakota",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/SD",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Tennessee",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/TN",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Texas",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/TX",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Vermont",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/VT",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Virginia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/VA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Virgin Islands",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/VI",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Washington",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/WA",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "West Virginia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/WV",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Wisconsin",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/WI",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Wyoming",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/WY",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Aland Islands",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Aland_Islands",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Argentina",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Argentina",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Austria",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Austria",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Australia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Australia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Belgium",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Belgium",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Belize",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Belize",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Brazil",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Brazil",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Bulgaria",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Bulgaria",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Cambodia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Cambodia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Canada",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Canada",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Chile",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Chile",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "China",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/China",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Colombia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Colombia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Costa Rica",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Costa_Rica",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Croatia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Croatia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Cyprus",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Cyprus",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Czech Republic",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Czech_Republic",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Denmark",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Denmark",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Ecuador",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Ecuador",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "El Salvador",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/El_Salvador",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "England",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/England",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Estonia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Estonia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Ethiopia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Ethiopia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Finland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Finland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "France",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/France",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Germany",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Germany",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Greece",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Greece",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Guatemala",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Guatemala",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Honduras",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Honduras",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Hungary",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Hungary",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Iceland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Iceland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "India",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/India",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Ireland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Ireland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Italy",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Italy",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Japan",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Japan",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Kenya",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Kenya",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Kosovo",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Kosovo",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Kuwait",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Kuwait",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Latvia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Latvia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Lithuania",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Lithuania",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Luxembourg",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Luxembourg",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Malawi",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Malawi",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Malaysia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Malaysia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Mexico",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Mexico",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Mongolia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Mongolia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Montenegro",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Montenegro",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "New Zealand",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/New_Zealand",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Netherlands",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Netherlands",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Nicaragua",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Nicaragua",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Northern Ireland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Northern_Ireland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Norway",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Norway",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "The Philippines",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/The_Philippines",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Panama",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Panama",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Poland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Poland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Portugal",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Portugal",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Puerto Rico",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Puerto_Rico",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Saudi Arabia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Saudi_Arabia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Scotland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Scotland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Serbia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Serbia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Singapore",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Singapore",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Slovakia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Slovakia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Slovenia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Slovenia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Spain",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Spain",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "South Africa",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/South_Africa",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "South Korea",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/South_Korea",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Sweden",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Sweden",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Switzerland",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Switzerland",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Thailand",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Thailand",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Ukraine",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Ukraine",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Uganda",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Uganda",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Uruguay",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Uruguay",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Venezuela",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Venezuela",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Vietnam",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Vietnam",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Wales",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Wales",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Zambia",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Zambia",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Zimbabwe",
+      "date": "2026-01-19",
+      "city": "miles of Greenville, NC",
+      "tier": "A",
+      "url": "https://www.discgolfscene.com/tournaments/Zimbabwe",
+      "distance": 0,
+      "isGVDG": false,
+      "spots": "14/72"
+    },
+    {
+      "name": "Jan19MonZebulon Flex XXI · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC431C-tier",
+      "date": "2026-01-19",
+      "city": "Zebulon, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Zebulon_Flex_XXI_2026",
       "distance": 55,
@@ -24,9 +1434,9 @@
       "spots": null
     },
     {
-      "name": "Jan24Sat2026 GVDG Chili BowlPDGA XC-tier · Sat, Jan 24, 2026Farmville Municipal DGCFarmville, NC14 / 721XC-tier",
+      "name": "Jan24Sat2026 GVDG Chili Bowl · Sat, Jan 24, 2026Farmville Municipal DGCFarmville, NC14 / 721XC-tier",
       "date": "2026-01-24",
-      "city": "Farmville Municipal DGC Farmville, NC",
+      "city": "Farmville, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
       "distance": 10,
@@ -36,7 +1446,7 @@
     {
       "name": "Jan24SatWhite Oak Gold Grand OpeningSat, Jan 24, 2026White Oak River CampgroundMaysville, NC1",
       "date": "2026-01-24",
-      "city": "White Oak River Campground Maysville, NC",
+      "city": "Maysville, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/White_Oak_Gold_Grand_Opening_2025",
       "distance": 50,
@@ -44,9 +1454,9 @@
       "spots": null
     },
     {
-      "name": "Jan25SunJDC of NC Membership DrivePDGA C-tier · Sun, Jan 25, 2026Northeast Creek ParkJacksonville, NC15 / 721C-tier",
+      "name": "Jan25SunJDC of NC Membership Drive · Sun, Jan 25, 2026Northeast Creek ParkJacksonville, NC15 / 721C-tier",
       "date": "2026-01-25",
-      "city": "Northeast Creek Park Jacksonville, NC",
+      "city": "Jacksonville, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/JDC_of_NC_Membership_Drive_2026",
       "distance": 50,
@@ -54,9 +1464,9 @@
       "spots": "15/72"
     },
     {
-      "name": "Jan-Feb31-1Sat-SunKings Cup XXI Pro / Am driven by InnovaPDGA B-tier · Sat-Sun, Jan 31-Feb 1, 2026Barnet ParkKinston, NC90 / 903B-tier",
+      "name": "Jan-Feb31-1Sat-SunKings Cup XXI Pro / Am driven by Innova · Sat-Sun, Jan 31-Feb 1, 2026Barnet ParkKinston, NC90 / 903B-tier",
       "date": "2026-01-31",
-      "city": "Barnet Park Kinston, NC",
+      "city": "Kinston, NC",
       "tier": "B",
       "url": "https://www.discgolfscene.com/tournaments/Kings_Cup_XX_Pro_Am_2026",
       "distance": 28,
@@ -66,7 +1476,7 @@
     {
       "name": "Feb7Sat16th Annual Rocky Mount Ice BowlSat, Feb 7, 2026Battle Park DGCRocky Mount, NC19 / 722",
       "date": "2026-02-07",
-      "city": "Battle Park DGC Rocky Mount, NC",
+      "city": "Rocky Mount, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/16th_Annual_Rocky_Mount_Ice_Bowl_2026",
       "distance": 40,
@@ -74,9 +1484,9 @@
       "spots": "19/72"
     },
     {
-      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc GolfPDGA XC-tier · Sat, Feb 7, 2026Ayden District ParkAyden, NC22 / 722XC-tier",
+      "name": "Feb7Sat2026 Ayden Founders' Day Classic - Sponsored by Climo Disc Golf · Sat, Feb 7, 2026Ayden District ParkAyden, NC22 / 722XC-tier",
       "date": "2026-02-07",
-      "city": "Ayden District Park Ayden, NC",
+      "city": "Ayden, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/2026_Ayden_Founders_Classic_2026",
       "distance": 10,
@@ -86,7 +1496,7 @@
     {
       "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2 / 722Doubles",
       "date": "2026-02-08",
-      "city": "North Recreational Complex Greenville, NC",
+      "city": "Greenville, NC",
       "tier": "Doubles",
       "url": "https://www.discgolfscene.com/tournaments/Scallywag_Showdown_USDGC_DUBS_QUALIFIER_2026",
       "distance": 0,
@@ -94,9 +1504,9 @@
       "spots": "2/72"
     },
     {
-      "name": "Feb15SunOFDA February MonthlyPDGA C-tier · Sun, Feb 15, 2026Richlands-Steed ParkRichlands, NC51C-tier",
+      "name": "Feb15SunOFDA February Monthly · Sun, Feb 15, 2026Richlands-Steed ParkRichlands, NC51C-tier",
       "date": "2026-02-15",
-      "city": "Steed Park Richlands, NC",
+      "city": "Richlands, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/OFDA_February_Monthly_2026",
       "distance": 55,
@@ -106,7 +1516,7 @@
     {
       "name": "Feb28SatThe Barnet BrawlSat, Feb 28, 2026Barnet ParkKinston, NC1 / 72",
       "date": "2026-02-28",
-      "city": "Barnet Park Kinston, NC",
+      "city": "Kinston, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/The_Barnet_Brawl_2026",
       "distance": 28,
@@ -114,9 +1524,9 @@
       "spots": "1/72"
     },
     {
-      "name": "Mar6FriSpring Break Flex 2026PDGA Flex C-tier · Fri, Mar 6, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startFri, Jan 30 at 8:00am                        ESTC-tier",
+      "name": "Mar6FriSpring Break Flex 2026PDGA Flex C-tier · Fri, Mar 6, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startFri, Jan 30 at 8:00am ESTC-tier",
       "date": "2026-03-06",
-      "city": "North Carolina Wesleyan University Rocky Mount, NC",
+      "city": "Rocky Mount, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Spring_Break_Flex_2026",
       "distance": 40,
@@ -124,19 +1534,9 @@
       "spots": null
     },
     {
-      "name": "Mar20-22Fri-SunDiscraft Presents: Spike Hyzer's: North Carolina Disc Golf Championship XV Supported By Grip EQ.PDGA A-tier · Fri-Sun, Mar 20-22, 2026Sunset ParkRocky Mount, NC43 / 2443A-tier",
-      "date": "2026-03-20",
-      "city": "Sunset Park Rocky Mount, NC",
-      "tier": "A",
-      "url": "https://www.discgolfscene.com/tournaments/Discraft_Presents_Spike_Hyzers_North_Carolina_Disc_Golf_Championship_XV_Supported_By_Grip_EQ_2026",
-      "distance": 40,
-      "isGVDG": false,
-      "spots": "43/244"
-    },
-    {
-      "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC15 / 952XC-tier",
+      "name": "Apr12SunLancer Chain Chaser 9 · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC15 / 952XC-tier",
       "date": "2026-04-12",
-      "city": "Lenoir Community College Kinston, NC",
+      "city": "Kinston, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Lancer_Chain_Chaser_9_2026",
       "distance": 28,
@@ -144,9 +1544,9 @@
       "spots": "15/95"
     },
     {
-      "name": "May9SatSchool’s Out Flex 2026PDGA Flex C-tier · Sat, May 9, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startWed, Apr 1 at 8:00pm                        EDTC-tier",
+      "name": "May9SatSchool’s Out Flex 2026PDGA Flex C-tier · Sat, May 9, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startWed, Apr 1 at 8:00pm EDTC-tier",
       "date": "2026-05-09",
-      "city": "North Carolina Wesleyan University Rocky Mount, NC",
+      "city": "Rocky Mount, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/School_s_Out_Flex_2026",
       "distance": 40,
@@ -154,19 +1554,9 @@
       "spots": null
     },
     {
-      "name": "Jul17-19Fri-SunCrom Transmission & Automotive Specialist Presents The 6th Annual Kinston Open Supported By InnovaFri-Sun, Jul 17-19, 2026Kinston Country Club Temp courseKinston, NCWed, Apr 8 at 8:00pm                        EDT",
-      "date": "2026-07-17",
-      "city": "Kinston Country Club Temp course Kinston, NC",
-      "tier": "Other",
-      "url": "https://www.discgolfscene.com/tournaments/Crom_Transmission_and_Automotive_Specialist_Presents_The_5th_Annual_Kinston_Open_Supported_By_Innova_2026",
-      "distance": 28,
-      "isGVDG": false,
-      "spots": null
-    },
-    {
-      "name": "Aug29SatBill Fay Clubs and DubsSat, Aug 29, 2026Joel Smith Memorial at Bill Fay ParkKinston, NC2DoublesMon, Jul 20 at 12:00am                        EDT",
+      "name": "Aug29SatBill Fay Clubs and DubsSat, Aug 29, 2026Joel Smith Memorial at Bill Fay ParkKinston, NC2DoublesMon, Jul 20 at 12:00am EDT",
       "date": "2026-08-29",
-      "city": "Joel Smith Memorial at Bill Fay Park Kinston, NC",
+      "city": "Kinston, NC",
       "tier": "Doubles",
       "url": "https://www.discgolfscene.com/tournaments/Bill_Fay_Clubs_and_Dubs_2026",
       "distance": 28,
@@ -174,9 +1564,9 @@
       "spots": null
     },
     {
-      "name": "Sep12-13Sat-SunThe Joel Smith Memorial Birdie Shootout **Finale**Sat-Sun, Sep 12-13, 2026Barnet ParkKinston, NC4Thu, Jul 30 at 12:00am                        EDT",
+      "name": "Sep12-13Sat-SunThe Joel Smith Memorial Birdie Shootout **Finale**Sat-Sun, Sep 12-13, 2026Barnet ParkKinston, NC4Thu, Jul 30 at 12:00am EDT",
       "date": "2026-09-12",
-      "city": "Barnet Park Kinston, NC",
+      "city": "Kinston, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/The_Joel_Smith_Memorial_Finale_2026",
       "distance": 28,
@@ -186,7 +1576,7 @@
     {
       "name": "Dec12-13Sat-SunScorpion Disc Golf Match Play InvitationalSat-Sun, Dec 12-13, 2026Barnet ParkKinston, NC4Teams",
       "date": "2026-12-12",
-      "city": "Barnet Park Kinston, NC",
+      "city": "Kinston, NC",
       "tier": "Other",
       "url": "https://www.discgolfscene.com/tournaments/Scorpion_Disc_Golf_Match_Play_Invitational_2026",
       "distance": 28,
