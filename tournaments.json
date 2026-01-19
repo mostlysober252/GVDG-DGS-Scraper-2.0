@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-19T13:56:54.726313",
+  "lastUpdated": "2026-01-19T18:58:36.819031",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
@@ -14,7 +14,7 @@
       "spots": "14/72"
     },
     {
-      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC211C-tier",
+      "name": "Jan19MonZebulon Flex XXIPDGA C-tier · Mon, Jan 19, 2026The Z at Zebulon Community ParkZebulon, NC431C-tier",
       "date": "2026-01-19",
       "city": "The Z at Zebulon Community Park Zebulon, NC",
       "tier": "C",
@@ -84,14 +84,14 @@
       "spots": "22/72"
     },
     {
-      "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2Doubles",
+      "name": "Feb8SunScallywag Showdown(USDGC DUBS QUALIFIER)Sun, Feb 8, 2026North Recreational ComplexGreenville, NC2 / 722Doubles",
       "date": "2026-02-08",
       "city": "North Recreational Complex Greenville, NC",
       "tier": "Doubles",
       "url": "https://www.discgolfscene.com/tournaments/Scallywag_Showdown_USDGC_DUBS_QUALIFIER_2026",
       "distance": 0,
       "isGVDG": false,
-      "spots": null
+      "spots": "2/72"
     },
     {
       "name": "Feb15SunOFDA February MonthlyPDGA C-tier · Sun, Feb 15, 2026Richlands-Steed ParkRichlands, NC51C-tier",
@@ -134,14 +134,14 @@
       "spots": "43/244"
     },
     {
-      "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC14 / 952XC-tier",
+      "name": "Apr12SunLancer Chain Chaser 9PDGA XC-tier · Sun, Apr 12, 2026Lenoir Community CollegeKinston, NC15 / 952XC-tier",
       "date": "2026-04-12",
       "city": "Lenoir Community College Kinston, NC",
       "tier": "C",
       "url": "https://www.discgolfscene.com/tournaments/Lancer_Chain_Chaser_9_2026",
       "distance": 28,
       "isGVDG": false,
-      "spots": "14/95"
+      "spots": "15/95"
     },
     {
       "name": "May9SatSchool’s Out Flex 2026PDGA Flex C-tier · Sat, May 9, 2026North Carolina Wesleyan UniversityRocky Mount, NC1Flex startWed, Apr 1 at 8:00pm                        EDTC-tier",
