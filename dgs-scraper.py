@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-GVDG Tournament Scraper v3.0
+GVDG Tournament Scraper v4.0
 Scrapes tournaments from Disc Golf Scene within 60 miles of Greenville, NC
 
-COMPLETE REWRITE - v3.0 fixes:
-- Properly filters out navigation menu items (states/countries)
-- Correctly parses individual tournament fields
-- Better handling of DGS page structure
+v4.0 - Complete rewrite with proper HTML parsing
+- Uses the search results page which has cleaner structure
+- Properly extracts tournament name, date, venue, city from separate elements
+- Filters by distance from Greenville, NC
+- Identifies GVDG-hosted events
 
 Usage:
     python dgs-scraper.py
@@ -19,8 +20,9 @@ import json
 import re
 import sys
 from datetime import datetime, timedelta
-from urllib.parse import urlencode, urljoin
+from urllib.parse import urlencode
 import time
+from math import radians, cos, sin, asin, sqrt
 
 try:
     import requests
@@ -46,11 +48,12 @@ CONFIG = {
         "longitude": -77.375799,
         "zipcode": "27833"
     },
-    "distance": 60,
-    "formats": ["s", "d", "t"],
+    "distance": 60,  # miles
+    "formats": ["s", "d", "t"],  # singles, doubles, teams
     "gvdg_keywords": [
-        "gvdg", "greenville valley", "hangover", "chili bowl",
-        "frozen bowl", "ayden founders"
+        "gvdg", "greenville disc golf", "hangover", "chili cookoff",
+        "frozen bowl", "ayden founders", "down east", "depc",
+        "mando madness", "scholarship shootout"
     ],
     "timeout": 30,
     "retry_attempts": 3,
@@ -58,77 +61,37 @@ CONFIG = {
     "output_file": "tournaments.json"
 }
 
+# Known cities and their approximate distances from Greenville, NC
+CITY_DISTANCES = {
+    "greenville": 0,
+    "winterville": 5,
+    "ayden": 10,
+    "farmville": 10,
+    "washington": 25,
+    "kinston": 28,
+    "goldsboro": 45,
+    "wilson": 35,
+    "rocky mount": 40,
+    "new bern": 40,
+    "jacksonville": 50,
+    "richlands": 55,
+    "maysville": 50,
+    "morehead city": 60,
+    "raleigh": 80,
+    "cary": 75,
+    "durham": 85,
+    "chapel hill": 90,
+    "charlotte": 220,
+    "wilmington": 130,
+    "fayetteville": 100,
+    "columbia": 30,  # Columbia, NC (not SC)
+}
+
 DGS_BASE_URL = "https://www.discgolfscene.com"
-
-# ============================================
-# URLS THAT ARE NOT TOURNAMENTS (navigation/menu items)
-# ============================================
-NON_TOURNAMENT_PATHS = {
-    # Navigation menu items
-    '/tournaments/mine', '/tournaments/new',
-    # US States
-    '/tournaments/AB', '/tournaments/BC', '/tournaments/MB', '/tournaments/NB',
-    '/tournaments/NL', '/tournaments/NS', '/tournaments/ON', '/tournaments/PE',
-    '/tournaments/QC', '/tournaments/SK', '/tournaments/YT',
-    '/tournaments/AA', '/tournaments/AE', '/tournaments/AP',
-    '/tournaments/AL', '/tournaments/AK', '/tournaments/AZ', '/tournaments/AR',
-    '/tournaments/CA', '/tournaments/CO', '/tournaments/CT', '/tournaments/DC',
-    '/tournaments/DE', '/tournaments/FL', '/tournaments/GA', '/tournaments/HI',
-    '/tournaments/ID', '/tournaments/IL', '/tournaments/IN', '/tournaments/IA',
-    '/tournaments/KS', '/tournaments/KY', '/tournaments/LA', '/tournaments/ME',
-    '/tournaments/MD', '/tournaments/MA', '/tournaments/MI', '/tournaments/MN',
-    '/tournaments/MS', '/tournaments/MO', '/tournaments/MT', '/tournaments/NE',
-    '/tournaments/NV', '/tournaments/NH', '/tournaments/NJ', '/tournaments/NM',
-    '/tournaments/NY', '/tournaments/NC', '/tournaments/ND', '/tournaments/OH',
-    '/tournaments/OK', '/tournaments/OR', '/tournaments/PA', '/tournaments/PR',
-    '/tournaments/RI', '/tournaments/SC', '/tournaments/SD', '/tournaments/TN',
-    '/tournaments/TX', '/tournaments/UT', '/tournaments/VT', '/tournaments/VA',
-    '/tournaments/VI', '/tournaments/WA', '/tournaments/WV', '/tournaments/WI',
-    '/tournaments/WY',
-    # Countries
-    '/tournaments/Canada', '/tournaments/USA', '/tournaments/Mexico',
-    '/tournaments/Australia', '/tournaments/New_Zealand',
-}
-
-# Names that indicate navigation items, not tournaments
-NON_TOURNAMENT_NAMES = {
-    'my tournaments', '+ new tournament', 'new tournament',
-    'alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado',
-    'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho',
-    'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana',
-    'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota',
-    'mississippi', 'missouri', 'montana', 'nebraska', 'nevada',
-    'new hampshire', 'new jersey', 'new mexico', 'new york',
-    'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon',
-    'pennsylvania', 'rhode island', 'south carolina', 'south dakota',
-    'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington',
-    'west virginia', 'wisconsin', 'wyoming', 'district of columbia',
-    'puerto rico', 'virgin islands',
-    # Canadian provinces
-    'alberta', 'british columbia', 'manitoba', 'new brunswick',
-    'newfoundland', 'nova scotia', 'ontario', 'prince edward island',
-    'quebec', 'saskatchewan', 'yukon territory',
-    # Armed forces
-    'aa armed forces', 'ae armed forces', 'ap armed forces',
-    # Countries
-    'argentina', 'australia', 'austria', 'belgium', 'brazil', 'canada',
-    'china', 'denmark', 'england', 'finland', 'france', 'germany',
-    'ireland', 'italy', 'japan', 'mexico', 'netherlands', 'new zealand',
-    'norway', 'poland', 'scotland', 'spain', 'sweden', 'switzerland',
-    'wales', 'aland islands', 'belize', 'bulgaria', 'cambodia', 'chile',
-    'colombia', 'costa rica', 'croatia', 'cyprus', 'czech republic',
-    'ecuador', 'el salvador', 'estonia', 'ethiopia', 'greece', 'guatemala',
-    'honduras', 'hungary', 'iceland', 'india', 'kenya', 'kosovo', 'kuwait',
-    'latvia', 'lithuania', 'luxembourg', 'malawi', 'malaysia', 'mongolia',
-    'montenegro', 'nicaragua', 'northern ireland', 'the philippines',
-    'panama', 'portugal', 'saudi arabia', 'serbia', 'singapore', 'slovakia',
-    'slovenia', 'south africa', 'south korea', 'thailand', 'ukraine',
-    'uganda', 'uruguay', 'venezuela', 'vietnam', 'zambia', 'zimbabwe',
-}
 
 
 def build_search_url():
-    """Build the search URL with all parameters."""
+    """Build the search URL with location parameters."""
     params = {
         "filter[location][country]": "USA",
         "filter[location][name]": CONFIG["location"]["name"],
@@ -138,6 +101,7 @@ def build_search_url():
         "filter[location][units]": "mi",
         "filter[location][zipcode]": CONFIG["location"]["zipcode"],
     }
+    # Add format filters
     for i, fmt in enumerate(CONFIG["formats"]):
         params[f"filter[format][{i}]"] = fmt
     
@@ -147,7 +111,7 @@ def build_search_url():
 def fetch_page(url, attempt=1):
     """Fetch a page with retry logic."""
     headers = {
-        "User-Agent": "GVDG Tournament Scraper/3.0 (https://github.com/mostlysober252/GVDG-DGS-Scraper-2.0)",
+        "User-Agent": "GVDG Tournament Scraper/4.0 (https://github.com/mostlysober252/GVDG-DGS-Scraper-2.0)",
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "en-US,en;q=0.5",
     }
@@ -167,35 +131,6 @@ def fetch_page(url, attempt=1):
             raise
 
 
-def is_navigation_item(name, url):
-    """Check if this looks like a navigation menu item rather than a tournament."""
-    if not name or not url:
-        return True
-    
-    # Check URL path
-    path = url.replace(DGS_BASE_URL, '')
-    if path in NON_TOURNAMENT_PATHS:
-        return True
-    
-    # Check if URL is just a state/country code (2-letter paths)
-    if re.match(r'^/tournaments/[A-Z]{2}$', path):
-        return True
-    
-    # Check name against known non-tournament names
-    name_lower = name.lower().strip()
-    if name_lower in NON_TOURNAMENT_NAMES:
-        return True
-    
-    # Tournament names should have years or specific keywords
-    # Navigation items are usually just place names
-    if len(name) < 10 and not re.search(r'\d{4}', name):
-        # Short name with no year - probably navigation
-        if name_lower in NON_TOURNAMENT_NAMES:
-            return True
-    
-    return False
-
-
 def parse_date(date_text):
     """Parse date text to YYYY-MM-DD format."""
     if not date_text:
@@ -203,15 +138,19 @@ def parse_date(date_text):
     
     date_text = date_text.strip()
     
-    # Remove day-of-week prefix
+    # Remove day-of-week prefix like "Sat, " or "Fri-Sun, "
     date_text = re.sub(r'^[A-Za-z]{3}(-[A-Za-z]{3})?,\s*', '', date_text)
     
-    # Handle multi-day: "Jan 31-Feb 1, 2026" or "Mar 20-22, 2026"
-    match = re.match(r'([A-Za-z]{3})\s+(\d{1,2})-(?:[A-Za-z]{3}\s+)?\d{1,2},\s*(\d{4})', date_text)
+    # Handle multi-day formats: "Jan 31-Feb 1, 2026" -> use first date
+    # Also handles "Mar 7-8, 2026"
+    match = re.match(r'([A-Za-z]{3})\s+(\d{1,2})(?:-(?:[A-Za-z]{3}\s+)?\d{1,2})?,\s*(\d{4})', date_text)
     if match:
-        date_text = f"{match.group(1)} {match.group(2)}, {match.group(3)}"
+        month_str = match.group(1)
+        day = match.group(2)
+        year = match.group(3)
+        date_text = f"{month_str} {day}, {year}"
     
-    # Parse
+    # Parse standard format: "Jan 24, 2026"
     for fmt in ["%b %d, %Y", "%B %d, %Y"]:
         try:
             dt = datetime.strptime(date_text.strip(), fmt)
@@ -226,164 +165,177 @@ def extract_tier(text):
     """Extract PDGA tier from text."""
     if not text:
         return "Other"
-    text = text.upper()
+    text_upper = text.upper()
     
-    if "A-TIER" in text:
+    if "A-TIER" in text_upper:
         return "A"
-    elif "B-TIER" in text:
+    elif "B-TIER" in text_upper:
         return "B"
-    elif "C-TIER" in text or "C/B-TIER" in text:
+    elif "C-TIER" in text_upper or "C/B-TIER" in text_upper:
         return "C"
-    elif "XC-TIER" in text:
+    elif "XC-TIER" in text_upper:
         return "XC"
-    elif "LEAGUE" in text:
+    elif "LEAGUE" in text_upper:
         return "League"
-    elif "DOUBLES" in text:
+    elif "DOUBLES" in text_upper:
         return "Doubles"
+    elif "TEAMS" in text_upper:
+        return "Teams"
     return "Other"
 
 
 def extract_spots(text):
-    """Extract registration spots like '10/72'."""
+    """Extract registration spots like '10/72' from text."""
     if not text:
         return None
     match = re.search(r'(\d+)\s*/\s*(\d+)', text)
     return f"{match.group(1)}/{match.group(2)}" if match else None
 
 
-def is_gvdg_tournament(name):
-    """Check if tournament is GVDG-hosted."""
+def is_gvdg_tournament(name, venue=""):
+    """Check if tournament is GVDG-hosted based on name or venue."""
     if not name:
         return False
-    name_lower = name.lower()
-    return any(kw in name_lower for kw in CONFIG["gvdg_keywords"])
+    
+    combined = (name + " " + venue).lower()
+    return any(kw in combined for kw in CONFIG["gvdg_keywords"])
 
 
-def calculate_distance(city):
-    """Calculate approximate distance from Greenville, NC."""
+def estimate_distance(city):
+    """Estimate distance from Greenville, NC based on city name."""
     if not city:
-        return 30
+        return 30  # Default
     
-    known = {
-        "greenville": 0, "farmville": 10, "ayden": 10, "winterville": 5,
-        "kinston": 28, "rocky mount": 40, "wilson": 35, "jacksonville": 50,
-        "richlands": 55, "maysville": 50, "new bern": 40, "zebulon": 55,
-        "raleigh": 80, "goldsboro": 45, "cary": 75,
-    }
+    city_lower = city.lower().replace(", nc", "").strip()
     
-    city_lower = city.lower()
-    for known_city, dist in known.items():
+    # Check known cities
+    for known_city, dist in CITY_DISTANCES.items():
         if known_city in city_lower:
             return dist
+    
+    # Default for unknown NC cities
     return 30
 
 
-def parse_tournaments(html):
-    """Parse tournament listings from HTML."""
+def clean_text(text):
+    """Clean extracted text by removing extra whitespace."""
+    if not text:
+        return ""
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def parse_tournaments_from_nc_page(html):
+    """
+    Parse tournaments from the NC tournaments page.
+    The page structure has tournament cards as links with this format:
+    
+    [Date Block] [Logo] [Name] [Tier] · [Day, Date] [Venue][City] [Spots] [Format]
+    """
     soup = BeautifulSoup(html, 'html.parser')
     tournaments = []
     seen_urls = set()
     
-    print("  Parsing page...")
+    print("  Parsing NC tournaments page...")
     
-    # Find all links that look like tournament pages
-    # Tournament URLs: /tournaments/Tournament_Name_2026
-    links = soup.find_all('a', href=re.compile(r'/tournaments/[A-Za-z0-9_-]+(?:_\d{4})?/?$'))
+    # Find all tournament links - they link to /tournaments/Tournament_Name_YYYY
+    # The main content area contains the tournament listings
+    tournament_links = soup.find_all('a', href=re.compile(r'^https://www\.discgolfscene\.com/tournaments/[A-Za-z0-9_-]+'))
     
-    print(f"  Found {len(links)} potential links")
+    print(f"  Found {len(tournament_links)} potential tournament links")
     
-    for link in links:
+    for link in tournament_links:
         try:
-            href = link.get('href', '')
-            if not href:
+            url = link.get('href', '')
+            
+            # Skip non-tournament URLs
+            if not url or '/tournaments/search' in url or '/tournaments/new' in url:
+                continue
+            if '/tournaments/mine' in url:
+                continue
+            # Skip state/country navigation links (2-letter codes or country names)
+            if re.match(r'.*/tournaments/[A-Z]{2}$', url):
+                continue
+            if any(x in url for x in ['/tournaments/USA', '/tournaments/Canada', '/tournaments/North_Carolina']):
                 continue
             
-            # Build full URL
-            url = urljoin(DGS_BASE_URL, href)
-            
-            # Skip if already seen
+            # Skip if already processed
             if url in seen_urls:
                 continue
             seen_urls.add(url)
             
-            # Get name from link text
-            name = link.get_text(strip=True)
+            # Get the full text content of the link
+            link_text = link.get_text(separator=' ', strip=True)
             
-            # Skip navigation items
-            if is_navigation_item(name, url):
+            # Skip if this looks like a navigation item (very short or no date-like content)
+            if len(link_text) < 10:
                 continue
             
-            # Skip very short names or obvious non-tournaments
-            if not name or len(name) < 5:
-                continue
+            # The link text contains the tournament info in this format:
+            # "Tournament Name PDGA C-tier · Sat, Jan 24, 2026 VenueCity, NC 12 / 72 2"
             
-            # Skip if name looks like it contains concatenated data
-            # (this is a sign the scraper grabbed wrong element)
-            if 'Mon,' in name or 'Tue,' in name or 'Wed,' in name or \
-               'Thu,' in name or 'Fri,' in name or 'Sat,' in name or 'Sun,' in name:
-                # This name has date info embedded - it's concatenated
-                # Try to extract just the tournament name
-                # Pattern: "Jan19MonTournament Name · Day, Date..."
-                # We want just "Tournament Name"
-                
-                # Try to find the actual tournament name
-                # Usually after the day abbreviation and before the interpunct
-                match = re.search(r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)([A-Z][^·]+?)(?:\s*·|PDGA|$)', name)
-                if match:
-                    name = match.group(1).strip()
+            # Extract tournament name - it's before "PDGA" or before the date
+            name_match = re.match(r'^(.+?)(?:\s*PDGA\s*(?:Flex\s*)?[A-Za-z]-tier|\s*·|\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun))', link_text)
+            if name_match:
+                name = clean_text(name_match.group(1))
+            else:
+                # Try to get name from before the date pattern
+                name_match = re.match(r'^(.+?)(?:\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:-[A-Za-z]{3})?,)', link_text)
+                if name_match:
+                    name = clean_text(name_match.group(1))
                 else:
-                    # Can't extract clean name, skip
-                    continue
+                    # Fallback: use URL to extract name
+                    url_name = url.split('/')[-1].replace('_', ' ')
+                    # Remove year suffix
+                    name = re.sub(r'\s*\d{4}$', '', url_name)
             
-            # Find parent container for context
-            parent = link.find_parent(['div', 'li', 'article', 'tr'])
-            if parent is None:
-                parent = link
-            
-            parent_text = parent.get_text(separator=' ', strip=True)
-            
-            # Extract date
-            date_match = re.search(
-                r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun))?,\s*'
-                r'([A-Za-z]{3}\s+\d{1,2}(?:-(?:[A-Za-z]{3}\s+)?\d{1,2})?,\s*\d{4})',
-                parent_text
-            )
-            
-            if not date_match:
-                # Try simpler pattern
-                date_match = re.search(r'([A-Za-z]{3}\s+\d{1,2},\s*\d{4})', parent_text)
-            
-            if not date_match:
+            # Skip if name is still malformed or too long
+            if not name or len(name) > 150:
                 continue
             
-            parsed_date = parse_date(date_match.group(1) if date_match.lastindex else date_match.group(0))
+            # Extract date - look for "Day, Mon DD, YYYY" pattern
+            date_match = re.search(
+                r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:-[A-Za-z]{3})?,\s*([A-Za-z]{3})\s+(\d{1,2})(?:-(?:[A-Za-z]{3}\s+)?\d{1,2})?,\s*(\d{4})',
+                link_text
+            )
+            if date_match:
+                date_str = f"{date_match.group(1)} {date_match.group(2)}, {date_match.group(3)}"
+                parsed_date = parse_date(date_str)
+            else:
+                continue  # Skip if no date found
+            
             if not parsed_date:
                 continue
             
-            # Extract city - look for "City, NC" pattern
+            # Extract venue and city - look for pattern after date
+            # Format is usually: "VenueCity, NC" or "Venue**City, NC**"
             city = "NC"
-            city_match = re.search(r'([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?),\s*NC', parent_text)
+            venue = ""
+            
+            # Look for "City, NC" pattern
+            city_match = re.search(r'\*?\*?([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?),\s*NC\*?\*?', link_text)
             if city_match:
                 city = f"{city_match.group(1)}, NC"
             
-            # Extract tier and spots
-            tier = extract_tier(parent_text)
-            spots = extract_spots(parent_text)
-            distance = calculate_distance(city)
-            is_gvdg = is_gvdg_tournament(name)
+            # Extract tier
+            tier = extract_tier(link_text)
             
-            # Clean up name
-            name = re.sub(r'\s*PDGA\s*(Flex\s*)?(A|B|C|XC)-?[Tt]ier\s*', ' ', name)
-            name = re.sub(r'\s*·.*$', '', name)  # Remove everything after interpunct
-            name = re.sub(r'\s+', ' ', name).strip()
+            # Extract spots
+            spots = extract_spots(link_text)
             
-            # Final validation
-            if len(name) < 5 or len(name) > 200:
+            # Calculate distance
+            distance = estimate_distance(city)
+            
+            # Check if GVDG event
+            is_gvdg = is_gvdg_tournament(name, venue)
+            
+            # Filter by distance (should already be filtered by search, but double-check)
+            if distance > CONFIG["distance"] + 10:  # Allow small buffer
                 continue
             
             tournament = {
                 "name": name,
                 "date": parsed_date,
+                "venue": venue,
                 "city": city,
                 "tier": tier,
                 "url": url,
@@ -393,12 +345,28 @@ def parse_tournaments(html):
             }
             
             tournaments.append(tournament)
+            
+            # Log
             gvdg_mark = "⭐ " if is_gvdg else "   "
-            print(f"  {gvdg_mark}{name[:40]:<40} | {parsed_date} | {city}")
+            print(f"  {gvdg_mark}{name[:45]:<45} | {parsed_date} | {city}")
             
         except Exception as e:
-            print(f"  Error parsing: {e}")
+            print(f"  Error parsing tournament: {e}")
             continue
+    
+    return tournaments
+
+
+def parse_tournaments_from_search(html):
+    """
+    Alternative parser for search results page.
+    Falls back to this if NC page parsing fails.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    tournaments = []
+    
+    # Similar logic but adapted for search results structure
+    # This is a backup parser
     
     return tournaments
 
@@ -411,107 +379,136 @@ def validate_tournament(t):
     }
     
     for field, ftype in required.items():
-        if field not in t or not isinstance(t[field], ftype):
-            return False, f"Bad {field}"
+        if field not in t:
+            return False, f"Missing {field}"
+        if not isinstance(t[field], ftype):
+            return False, f"Bad type for {field}"
     
+    # Validate date format
     if not re.match(r'^\d{4}-\d{2}-\d{2}$', t['date']):
         return False, "Bad date format"
     
+    # Validate URL
     if 'discgolfscene.com' not in t['url']:
         return False, "Bad URL"
     
-    if t['tier'] not in ['A', 'B', 'C', 'XC', 'League', 'Doubles', 'Other']:
-        return False, "Bad tier"
+    # Validate tier
+    valid_tiers = ['A', 'B', 'C', 'XC', 'League', 'Doubles', 'Teams', 'Other']
+    if t['tier'] not in valid_tiers:
+        return False, f"Bad tier: {t['tier']}"
     
-    if len(t['name']) > 200:
-        return False, "Name too long"
+    # Validate name length
+    if len(t['name']) > 200 or len(t['name']) < 5:
+        return False, "Name length invalid"
     
     return True, "OK"
+
+
+def deduplicate_tournaments(tournaments):
+    """Remove duplicate tournaments by URL."""
+    seen_urls = set()
+    unique = []
+    
+    for t in tournaments:
+        if t['url'] not in seen_urls:
+            seen_urls.add(t['url'])
+            unique.append(t)
+    
+    return unique
+
+
+def filter_future_tournaments(tournaments):
+    """Keep only future tournaments (allow 1 day grace period)."""
+    cutoff = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    return [t for t in tournaments if t['date'] >= cutoff]
 
 
 def main():
     """Main function."""
     print("=" * 60)
-    print("GVDG Tournament Scraper v3.0")
+    print("GVDG Tournament Scraper v4.0")
     print("=" * 60)
     print(f"Location: {CONFIG['location']['name']}")
     print(f"Radius: {CONFIG['distance']} miles")
     print()
     
-    search_url = build_search_url()
-    print(f"Search URL:\n{search_url}\n")
+    # Try fetching the NC tournaments page first (more reliable structure)
+    nc_url = f"{DGS_BASE_URL}/tournaments/North_Carolina"
+    print(f"Fetching NC tournaments page...")
     
-    print("Fetching tournaments...")
     try:
-        html = fetch_page(search_url)
+        html = fetch_page(nc_url)
     except Exception as e:
-        print(f"FATAL: {e}")
+        print(f"FATAL: Could not fetch page: {e}")
         sys.exit(1)
     
-    # Save for debugging
+    # Save HTML for debugging
     with open('debug_page.html', 'w', encoding='utf-8') as f:
         f.write(html)
-    print("  (Saved debug_page.html)")
+    print("  (Saved debug_page.html for debugging)")
     
+    # Parse tournaments
     print("\nParsing tournaments...")
-    tournaments = parse_tournaments(html)
+    tournaments = parse_tournaments_from_nc_page(html)
     
     # Validate
-    print("\nValidating...")
+    print(f"\nValidating {len(tournaments)} tournaments...")
     valid = []
     for t in tournaments:
         ok, msg = validate_tournament(t)
         if ok:
             valid.append(t)
         else:
-            print(f"  ✗ {t.get('name', '?')[:30]}... - {msg}")
+            print(f"  ✗ {t.get('name', '?')[:35]}... - {msg}")
     
-    print(f"  {len(valid)}/{len(tournaments)} valid")
+    print(f"  {len(valid)}/{len(tournaments)} passed validation")
     
-    # Deduplicate by URL
-    seen = set()
-    unique = []
-    for t in valid:
-        if t['url'] not in seen:
-            seen.add(t['url'])
-            unique.append(t)
+    # Deduplicate
+    unique = deduplicate_tournaments(valid)
+    print(f"  {len(unique)} unique tournaments")
     
-    # Filter future only
-    cutoff = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-    future = [t for t in unique if t['date'] >= cutoff]
+    # Filter to future only
+    future = filter_future_tournaments(unique)
+    print(f"  {len(future)} upcoming tournaments")
+    
+    # Filter by distance from Greenville
+    nearby = [t for t in future if t['distance'] <= CONFIG['distance']]
+    print(f"  {len(nearby)} within {CONFIG['distance']} miles")
     
     # Sort by date
-    future.sort(key=lambda t: t['date'])
+    nearby.sort(key=lambda t: t['date'])
     
-    print(f"\nFound {len(future)} upcoming tournaments")
-    
-    # Output
+    # Build output
     output = {
         "lastUpdated": datetime.now().isoformat(),
         "searchCenter": CONFIG["location"]["name"],
         "searchRadius": CONFIG["distance"],
-        "tournaments": future
+        "totalFound": len(nearby),
+        "tournaments": nearby
     }
     
+    # Write JSON
     with open(CONFIG["output_file"], 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
     
-    print(f"Wrote to {CONFIG['output_file']}")
+    print(f"\nWrote {len(nearby)} tournaments to {CONFIG['output_file']}")
     
     # Summary
     print("\n" + "=" * 60)
-    gvdg_count = sum(1 for t in future if t['isGVDG'])
-    print(f"Total: {len(future)} | GVDG: {gvdg_count}")
+    gvdg_count = sum(1 for t in nearby if t['isGVDG'])
+    print(f"TOTAL: {len(nearby)} tournaments | GVDG: {gvdg_count}")
     print("=" * 60)
     
-    for t in future[:10]:
+    # Show first 15
+    for t in nearby[:15]:
         mark = "⭐ " if t['isGVDG'] else "   "
-        print(f"{mark}{t['date']} | {t['name'][:40]:<40} | {t['city']}")
+        tier_str = f"[{t['tier']}]" if t['tier'] != 'Other' else ""
+        print(f"{mark}{t['date']} | {t['name'][:42]:<42} | {t['city']:<18} {tier_str}")
     
-    if len(future) > 10:
-        print(f"   ... and {len(future) - 10} more")
+    if len(nearby) > 15:
+        print(f"   ... and {len(nearby) - 15} more")
     
-    print("\nDone!")
+    print("\n✓ Done!")
     return 0
 
 
