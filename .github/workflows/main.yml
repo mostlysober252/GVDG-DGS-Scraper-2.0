@@ -4,14 +4,14 @@ on:
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'dgs-scraper.py'
-      - '.github/workflows/main.yml'
+  # Remove push trigger temporarily to break the loop
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'dgs-scraper.py'
+  #     - '.github/workflows/main.yml'
 
-# Prevent multiple runs at the same time
 concurrency:
   group: scraper
   cancel-in-progress: true
@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -37,22 +40,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
       
+      - name: Pull latest changes
+        run: git pull origin main
+      
       - name: Run scraper
         run: python dgs-scraper.py
       
-      - name: Check for changes
-        id: git-check
-        run: |
-          git diff --quiet tournaments.json || echo "changed=true" >> $GITHUB_OUTPUT
-      
       - name: Commit and push if changed
-        if: steps.git-check.outputs.changed == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git pull --rebase origin main
           git add tournaments.json
-          git diff --staged --quiet || git commit -m "Update tournaments.json [automated]"
+          git diff --staged --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Update tournaments.json [automated]"
+          git pull --rebase origin main
           git push
       
       - name: Summary
