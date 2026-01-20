@@ -1,27 +1,17 @@
 {
-  "lastUpdated": "2026-01-19T22:24:23.723834",
+  "lastUpdated": "2026-01-20T04:06:26.123690",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "tournaments": [
     {
       "name": "PDGAAll eventsWithin 60 miles of Greenville, NCAny formatAll upcoming",
-      "date": "2026-01-19",
+      "date": "2026-01-24",
       "city": "Greenville, NC",
       "tier": "A",
       "url": "https://www.discgolfscene.com/tournaments/search-filter",
       "distance": 0,
       "isGVDG": false,
       "spots": "14/72"
-    },
-    {
-      "name": "Zebulon Flex XXI",
-      "date": "2026-01-19",
-      "city": "Park Zebulon, NC",
-      "tier": "C",
-      "url": "https://www.discgolfscene.com/tournaments/Zebulon_Flex_XXI_2026",
-      "distance": 55,
-      "isGVDG": false,
-      "spots": null
     },
     {
       "name": "White Oak Gold Grand OpeningSat, Jan 24, 2026White Oak River CampgroundMaysville, NC1",
@@ -101,7 +91,7 @@
       "url": "https://www.discgolfscene.com/tournaments/Discraft_Presents_Spike_Hyzers_North_Carolina_Disc_Golf_Championship_XV_Supported_By_Grip_EQ_2026",
       "distance": 40,
       "isGVDG": false,
-      "spots": "45/244"
+      "spots": "46/244"
     },
     {
       "name": "Lancer Chain Chaser 9",
