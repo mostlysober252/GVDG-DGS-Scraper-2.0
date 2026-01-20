@@ -45,7 +45,7 @@ jobs:
         run: |
           git diff --quiet tournaments.json || echo "changed=true" >> $GITHUB_OUTPUT
       
-       -  name: Commit and push if changed
+      - name: Commit and push if changed
         if: steps.git-check.outputs.changed == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
