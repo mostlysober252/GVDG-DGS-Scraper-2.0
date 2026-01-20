@@ -1,25 +1,20 @@
-# .github/workflows/scrape-tournaments.yml
-# 
-# This workflow runs the tournament scraper on a schedule and commits
-# the updated tournaments.json back to the repository.
-
 name: Scrape DGS Tournaments
 
 on:
-  # Run every 6 hours
   schedule:
     - cron: '0 */6 * * *'
-  
-  # Allow manual trigger
   workflow_dispatch:
-  
-  # Run on push to main (for testing)
   push:
     branches:
       - main
     paths:
       - 'dgs-scraper.py'
-      - '.github/workflows/scrape-tournaments.yml'
+      - '.github/workflows/main.yml'
+
+# Prevent multiple runs at the same time
+concurrency:
+  group: scraper
+  cancel-in-progress: true
 
 jobs:
   scrape:
@@ -57,6 +52,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add tournaments.json
           git commit -m "Update tournaments.json [automated]"
+          git pull --rebase
           git push
       
       - name: Summary
