@@ -1,20 +1,9 @@
 {
-  "lastUpdated": "2026-01-21T13:59:05.663959",
+  "lastUpdated": "2026-01-21T19:17:48.419105",
   "searchCenter": "Greenville, NC",
   "searchRadius": 60,
   "totalFound": 82,
   "tournaments": [
-    {
-      "name": "Jan 24",
-      "date": "2026-01-24",
-      "venue": "",
-      "city": "Farmville, NC",
-      "tier": "C",
-      "url": "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
-      "distance": 10,
-      "isGVDG": false,
-      "spots": "14/72"
-    },
     {
       "name": "Jan 24",
       "date": "2026-01-24",
@@ -24,7 +13,7 @@
       "url": "https://www.discgolfscene.com/tournaments/The_Davie_Duo_Ice_Bowl_2026",
       "distance": 30,
       "isGVDG": false,
-      "spots": "72/72"
+      "spots": "70/72"
     },
     {
       "name": "Jan 24",
@@ -189,7 +178,7 @@
       "url": "https://www.discgolfscene.com/tournaments/Scallywag_Showdown_USDGC_DUBS_QUALIFIER_2026",
       "distance": 0,
       "isGVDG": false,
-      "spots": "2/72"
+      "spots": "6/72"
     },
     {
       "name": "Feb 14",
@@ -234,6 +223,17 @@
       "distance": 30,
       "isGVDG": false,
       "spots": "9/120"
+    },
+    {
+      "name": "Feb 21",
+      "date": "2026-02-21",
+      "venue": "",
+      "city": "Farmville, NC",
+      "tier": "C",
+      "url": "https://www.discgolfscene.com/tournaments/GVDG_Frozen_Bowl_2025",
+      "distance": 10,
+      "isGVDG": false,
+      "spots": "14/72"
     },
     {
       "name": "Feb 21",
@@ -299,7 +299,7 @@
       "url": "https://www.discgolfscene.com/tournaments/Lu_Mil_Classic_Presented_by_Throw_Coast_Disc_Golf_2026",
       "distance": 30,
       "isGVDG": false,
-      "spots": "41/90"
+      "spots": "42/90"
     },
     {
       "name": "Feb 21",
@@ -596,7 +596,7 @@
       "url": "https://www.discgolfscene.com/tournaments/The_Blue_Ridge_Championship_Generated_By_Grit_Discs_2026",
       "distance": 30,
       "isGVDG": false,
-      "spots": "35/250"
+      "spots": "38/250"
     },
     {
       "name": "Apr 3-5",
@@ -618,7 +618,7 @@
       "url": "https://www.discgolfscene.com/tournaments/Lancer_Chain_Chaser_9_2026",
       "distance": 28,
       "isGVDG": false,
-      "spots": "16/95"
+      "spots": "18/95"
     },
     {
       "name": "Apr 12",
