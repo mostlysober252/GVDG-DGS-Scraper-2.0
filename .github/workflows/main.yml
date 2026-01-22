@@ -2,67 +2,28 @@ name: Scrape DGS Tournaments
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
-  workflow_dispatch:
-  # Remove push trigger temporarily to break the loop
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - 'dgs-scraper.py'
-  #     - '.github/workflows/main.yml'
-
-concurrency:
-  group: scraper
-  cancel-in-progress: true
+    # Runs daily at 6 AM UTC (2 AM EST)
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
     
-    permissions:
-      contents: write
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: main
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
+
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
-      
-      - name: Pull latest changes
-        run: git pull origin main
-      
+          pip install requests beautifulsoup4 gspread oauth2client
+
       - name: Run scraper
-        run: python dgs-scraper.py
-      
-      - name: Commit and push if changed
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add tournaments.json
-          git diff --staged --quiet && echo "No changes to commit" && exit 0
-          git commit -m "Update tournaments.json [automated]"
-          git pull --rebase origin main
-          git push
-      
-      - name: Summary
-        run: |
-          echo "## Scraper Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          if [ -f tournaments.json ]; then
-            COUNT=$(python -c "import json; print(len(json.load(open('tournaments.json'))['tournaments']))")
-            echo "✅ Found **$COUNT** tournaments" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "❌ No tournaments.json generated" >> $GITHUB_STEP_SUMMARY
-          fi
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: python scripts/scrape_tournaments.py
