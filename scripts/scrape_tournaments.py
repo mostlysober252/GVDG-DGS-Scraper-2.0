@@ -142,6 +142,46 @@ def extract_tournaments(html):
     return tournaments
 
 
+def extract_tier(page_text):
+    """Extract PDGA tier from page text using multiple patterns."""
+    
+    # Pattern 1: "PDGA B-tier" or "PDGA XC-tier"
+    match = re.search(r'PDGA\s+([ABCX](?:/[ABCX])?-tier|XC-tier|XB-tier)', page_text, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    
+    # Pattern 2: Just "B-tier" or "C-tier" standalone
+    match = re.search(r'\b([ABCX]-tier)\b', page_text, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    
+    # Pattern 3: "XC-tier" or "XB-tier" standalone
+    match = re.search(r'\b(XC-tier|XB-tier)\b', page_text, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    
+    # Pattern 4: Look for tier in specific HTML elements or badges
+    # Sometimes it's formatted as "C tier" without hyphen
+    match = re.search(r'\b([ABCX])\s+tier\b', page_text, re.IGNORECASE)
+    if match:
+        return f"{match.group(1)}-tier"
+    
+    # Pattern 5: Check for "Flex" which indicates Flex start C-tier
+    if re.search(r'\bFlex\s+start\b', page_text, re.IGNORECASE):
+        # Check if there's also a tier mentioned
+        match = re.search(r'\bFlex[^·]*([ABCX]-tier|C-tier)', page_text, re.IGNORECASE)
+        if match:
+            return match.group(1)
+    
+    # Pattern 6: "PDGA-sanctioned" followed by tier somewhere
+    if 'pdga' in page_text.lower() or 'sanctioned' in page_text.lower():
+        match = re.search(r'([ABCX]-tier|XC-tier|XB-tier)', page_text, re.IGNORECASE)
+        if match:
+            return match.group(1)
+    
+    return ''
+
+
 def fetch_tournament_details(tournaments):
     """Fetch individual tournament pages to get accurate details."""
     print(f"\nFetching details for {len(tournaments)} tournaments...")
@@ -218,12 +258,12 @@ def fetch_tournament_details(tournaments):
                 else:
                     t['location'] = loc_text + ', NC'
             
-            # Get tier
-            tier_match = re.search(r'PDGA\s+([ABCX](?:/[ABCX])?-tier|XC-tier|XB-tier)', page_text, re.IGNORECASE)
-            if tier_match:
-                t['tier'] = tier_match.group(1)
+            # Get tier using improved extraction function
+            tier = extract_tier(page_text)
+            if tier:
+                t['tier'] = tier
             
-            print(f"    → {t['name'][:40]} | {t['location']} | {t['date']}")
+            print(f"    → {t['name'][:40]} | {t['location']} | {t['date']} | {t['tier']}")
             
         except Exception as e:
             print(f"    ! Error fetching {t['url']}: {e}")
@@ -328,7 +368,7 @@ def main():
             print(f"Final: {len(tournaments)} tournaments")
             print('='*60)
             for t in tournaments:
-                print(f"  {t['date']:12} | {t['name'][:40]:40} | {t['location']}")
+                print(f"  {t['date']:12} | {t['name'][:40]:40} | {t['location']:15} | {t['tier']}")
             
             update_google_sheet(tournaments)
         else:
