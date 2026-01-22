@@ -31,7 +31,7 @@ DGS_URL = (
 # Google Sheet ID (extract from your published URL)
 # From: https://docs.google.com/spreadsheets/d/e/2PACX-1vRz6V6BAwII4eoqITz4MW5zmM_3mYJqrtqtZl9xB87lAZgDT1E0Do1r2cp2aa1tvEKWevnPhb2zQu4s/pub
 # The actual sheet ID is different - you'll need to get it from the editable URL
-SHEET_ID = os.environ.get('GOOGLE_SHEET_ID', 'YOUR_SHEET_ID_HERE')
+SHEET_ID = os.environ.get('GOOGLE_SHEET_ID', '1s-GhF_K0i1vACYlHBiprzpuY4cNHJnRvlwHxNaTnVWw')
 
 
 def scrape_tournaments():
