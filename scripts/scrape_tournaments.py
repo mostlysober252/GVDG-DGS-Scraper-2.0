@@ -168,14 +168,40 @@ def fetch_tournament_details(tournaments):
                 if clean_title and len(clean_title) > 3:
                     t['name'] = clean_title
             
-            # Get date - look for pattern like "Sat, Feb 21, 2026" or "Sat-Sun, Feb 21-22, 2026"
+            # Get date - Try multiple patterns
+            date_str = None
+            
+            # Pattern 1: "Sat-Sun, Jan 31-Feb 1, 2026" (spans two months)
             date_match = re.search(
                 r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun))?,\s+'
-                r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})(?:-\d{1,2})?,\s+(\d{4})',
+                r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})-'
+                r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)?\s*(\d{1,2}),\s+(\d{4})',
                 page_text
             )
             if date_match:
-                t['date'] = f"{date_match.group(1)} {date_match.group(2)}, {date_match.group(3)}"
+                date_str = f"{date_match.group(1)} {date_match.group(2)}, {date_match.group(4)}"
+            
+            # Pattern 2: "Sat, Feb 21, 2026" or "Sat-Sun, Feb 21-22, 2026" (single month)
+            if not date_str:
+                date_match = re.search(
+                    r'(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:-(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun))?,\s+'
+                    r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})(?:-\d{1,2})?,\s+(\d{4})',
+                    page_text
+                )
+                if date_match:
+                    date_str = f"{date_match.group(1)} {date_match.group(2)}, {date_match.group(3)}"
+            
+            # Pattern 3: Just "Jan 31, 2026" without day of week
+            if not date_str:
+                date_match = re.search(
+                    r'\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),\s+(\d{4})',
+                    page_text
+                )
+                if date_match:
+                    date_str = f"{date_match.group(1)} {date_match.group(2)}, {date_match.group(3)}"
+            
+            if date_str:
+                t['date'] = date_str
             
             # Get location - look for "Course Name City, NC" pattern
             loc_match = re.search(r'([A-Z][A-Za-z\s\'\.]+),\s*NC\b', page_text)
