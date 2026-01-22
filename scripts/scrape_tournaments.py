@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-Scrape Disc Golf Scene tournaments within 60 miles of Greenville, NC
-and update Google Sheet with the results.
+Scrape Disc Golf Scene tournaments from the North Carolina page
+and filter to those within ~60 miles of Greenville, NC.
+
+Since the DGS search page loads results via JavaScript (which we can't scrape),
+we instead scrape the static NC tournaments page and filter by known nearby cities.
 """
 
 import requests
@@ -13,130 +16,187 @@ import os
 from datetime import datetime
 import re
 
-# DGS search URL with filters applied
-DGS_URL = (
-    "https://www.discgolfscene.com/tournaments/search?"
-    "filter%5Blocation%5D%5Bcountry%5D=USA&"
-    "filter%5Blocation%5D%5Bname%5D=Greenville%2C+NC&"
-    "filter%5Blocation%5D%5Blatitude%5D=35.597011&"
-    "filter%5Blocation%5D%5Blongitude%5D=-77.375799&"
-    "filter%5Blocation%5D%5Bdistance%5D=60&"
-    "filter%5Blocation%5D%5Bunits%5D=mi&"
-    "filter%5Blocation%5D%5Bzipcode%5D=27833&"
-    "filter%5Bformat%5D%5B0%5D=s&"
-    "filter%5Bformat%5D%5B1%5D=d&"
-    "filter%5Bformat%5D%5B2%5D=t"
-)
+# Google Sheet ID - YOUR ACTUAL SHEET ID
+SHEET_ID = '1s-GhF_K0i1vACYlHBiprzpuY4cNHJnRvlwHxNaTnVWw'
 
-# Google Sheet ID (extract from your published URL)
-# From: https://docs.google.com/spreadsheets/d/e/2PACX-1vRz6V6BAwII4eoqITz4MW5zmM_3mYJqrtqtZl9xB87lAZgDT1E0Do1r2cp2aa1tvEKWevnPhb2zQu4s/pub
-# The actual sheet ID is different - you'll need to get it from the editable URL
-SHEET_ID = os.environ.get('GOOGLE_SHEET_ID', 'YOUR_SHEET_ID_HERE')
+# NC Tournaments page (static HTML, easier to scrape)
+DGS_NC_URL = "https://www.discgolfscene.com/tournaments/North_Carolina"
+
+# Cities/areas within ~60 miles of Greenville, NC
+NEARBY_LOCATIONS = [
+    # Greenville area
+    'greenville', 'winterville', 'ayden', 'farmville', 'simpson',
+    # Pitt County
+    'pitt county', 'bethel', 'grifton', 'fountain',
+    # Within 30 miles
+    'kinston', 'new bern', 'washington', 'williamston', 'tarboro',
+    'rocky mount', 'wilson', 'goldsboro', 'la grange', 'snow hill',
+    # Within 60 miles  
+    'jacksonville', 'havelock', 'morehead city', 'beaufort',
+    'roanoke rapids', 'elizabeth city', 'edenton', 'plymouth',
+    'nashville', 'spring hope', 'zebulon', 'wendell',
+    'smithfield', 'selma', 'dunn', 'clinton',
+    'maysville', 'richlands', 'swansboro',
+    # Course names that might appear
+    'west meadowbrook', 'ecu', 'north rec', 'covenant',
+    'third street', 'barnet', 'creek side', 'northeast creek',
+    # Club names
+    'gvdg'
+]
 
 
 def scrape_tournaments():
-    """Scrape tournament data from Disc Golf Scene."""
+    """Scrape tournament data from DGS North Carolina page."""
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
     }
     
+    print(f"Fetching: {DGS_NC_URL}")
+    
     try:
-        response = requests.get(DGS_URL, headers=headers, timeout=30)
+        response = requests.get(DGS_NC_URL, headers=headers, timeout=30)
         response.raise_for_status()
+        print(f"Response status: {response.status_code}")
+        print(f"Content length: {len(response.text)} characters")
     except requests.RequestException as e:
         print(f"Error fetching DGS: {e}")
         return []
     
     soup = BeautifulSoup(response.text, 'html.parser')
     tournaments = []
-    
-    # Find tournament cards/rows - DGS uses various selectors
-    # Try multiple possible selectors since their HTML may change
-    tournament_elements = soup.select('.tournament-card, .tournament-row, [data-tournament], .event-card')
-    
-    # If no elements found with those selectors, try finding links to tournament pages
-    if not tournament_elements:
-        tournament_elements = soup.select('a[href*="/tournaments/"]')
-    
-    for element in tournament_elements:
-        try:
-            tournament = parse_tournament_element(element, soup)
-            if tournament and tournament.get('name'):
-                tournaments.append(tournament)
-        except Exception as e:
-            print(f"Error parsing tournament: {e}")
-            continue
-    
-    # Remove duplicates based on URL
     seen_urls = set()
-    unique_tournaments = []
-    for t in tournaments:
-        if t.get('url') and t['url'] not in seen_urls:
-            seen_urls.add(t['url'])
-            unique_tournaments.append(t)
     
-    print(f"Found {len(unique_tournaments)} tournaments")
-    return unique_tournaments
+    # Get all text content for debugging
+    page_text = soup.get_text()
+    print(f"Page text length: {len(page_text)} characters")
+    
+    # Find all links to tournament pages
+    all_links = soup.find_all('a', href=True)
+    print(f"Total links found: {len(all_links)}")
+    
+    tournament_links = [a for a in all_links if '/tournament' in a.get('href', '').lower() 
+                        and '/tournaments/' not in a.get('href', '').lower()]
+    
+    # Also try the /tournaments/ pattern but exclude state pages
+    tournament_links2 = [a for a in all_links if re.search(r'/tournaments/[^/]+_\d{4}', a.get('href', ''))]
+    tournament_links.extend(tournament_links2)
+    
+    print(f"Tournament links found: {len(tournament_links)}")
+    
+    for link in tournament_links:
+        href = link.get('href', '')
+        
+        # Build full URL
+        if href.startswith('/'):
+            full_url = f"https://www.discgolfscene.com{href}"
+        elif href.startswith('http'):
+            full_url = href
+        else:
+            continue
+            
+        # Skip duplicates
+        if full_url in seen_urls:
+            continue
+        seen_urls.add(full_url)
+        
+        # Get tournament name
+        name = link.get_text(strip=True)
+        if not name or len(name) < 3:
+            continue
+            
+        # Skip navigation links
+        skip_words = ['tournaments', 'search', 'filter', 'load more', 'sign in', 'register', 'north carolina']
+        if name.lower() in skip_words:
+            continue
+        
+        # Get parent element for context
+        parent = link.find_parent(['div', 'li', 'td', 'span'])
+        context_text = ''
+        location = ''
+        tier = ''
+        date_str = ''
+        
+        if parent:
+            # Get broader context
+            grandparent = parent.find_parent(['div', 'tr', 'section'])
+            if grandparent:
+                context_text = grandparent.get_text(' ', strip=True)
+            else:
+                context_text = parent.get_text(' ', strip=True)
+            
+            # Extract location (City, NC pattern)
+            loc_match = re.search(r'at\s+[^·]+?([A-Za-z\s\.]+),\s*NC', context_text)
+            if not loc_match:
+                loc_match = re.search(r'([A-Za-z\s\.]+),\s*NC', context_text)
+            if loc_match:
+                location = loc_match.group(1).strip() + ', NC'
+            
+            # Extract tier
+            tier_match = re.search(r'(PDGA\s+)?([ABCX](?:/[ABCX])?-tier|XC-tier|Flex)', context_text, re.IGNORECASE)
+            if tier_match:
+                tier = tier_match.group(2) if tier_match.group(2) else tier_match.group(0)
+            
+            # Extract date
+            date_match = re.search(r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+(\d{1,2})(?:-\d{1,2})?(?:,?\s*(\d{4}))?', context_text, re.IGNORECASE)
+            if date_match:
+                month = date_match.group(1)[:3].capitalize()
+                day = date_match.group(2)
+                year = date_match.group(3) if date_match.group(3) else '2025'
+                date_str = f"{month} {day}, {year}"
+        
+        # Check if nearby
+        check_text = (name + ' ' + location + ' ' + full_url + ' ' + context_text).lower()
+        is_nearby = any(loc in check_text for loc in NEARBY_LOCATIONS)
+        
+        if is_nearby:
+            tournament = {
+                'date': date_str,
+                'name': clean_name(name),
+                'location': location,
+                'tier': tier,
+                'url': full_url
+            }
+            tournaments.append(tournament)
+            print(f"  ✓ Found: {tournament['name'][:50]} | {location}")
+    
+    # Sort by date
+    tournaments = sort_by_date(tournaments)
+    
+    print(f"\nTotal nearby tournaments: {len(tournaments)}")
+    return tournaments
 
 
-def parse_tournament_element(element, soup):
-    """Parse a single tournament element and extract data."""
-    tournament = {
-        'date': '',
-        'name': '',
-        'location': '',
-        'tier': '',
-        'url': ''
+def clean_name(name):
+    """Clean up tournament name."""
+    name = re.sub(r'\s*·\s*\d{4}\s*$', '', name)
+    name = re.sub(r'\s+', ' ', name).strip()
+    return name
+
+
+def sort_by_date(tournaments):
+    """Sort tournaments by date."""
+    month_order = {
+        'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+        'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
     }
     
-    # Get tournament URL
-    if element.name == 'a':
-        href = element.get('href', '')
-    else:
-        link = element.select_one('a[href*="/tournaments/"]')
-        href = link.get('href', '') if link else ''
+    def get_sort_key(t):
+        date_str = t.get('date', '')
+        match = re.search(r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2}),?\s*(\d{4})?', date_str)
+        if match:
+            month = month_order.get(match.group(1), 0)
+            day = int(match.group(2))
+            year = int(match.group(3)) if match.group(3) else 2025
+            return (year, month, day)
+        return (9999, 99, 99)
     
-    if href:
-        if not href.startswith('http'):
-            href = 'https://www.discgolfscene.com' + href
-        tournament['url'] = href
-    
-    # Get tournament name
-    name_elem = element.select_one('.tournament-name, .event-name, h3, h4, .title')
-    if name_elem:
-        tournament['name'] = name_elem.get_text(strip=True)
-    elif element.name == 'a':
-        tournament['name'] = element.get_text(strip=True)
-    
-    # Skip if it's a navigation link or empty
-    skip_names = ['search', 'filter', 'load more', 'view all', 'sign in', 'register']
-    if tournament['name'].lower() in skip_names or len(tournament['name']) < 3:
-        return None
-    
-    # Get date
-    date_elem = element.select_one('.date, .tournament-date, .event-date, time')
-    if date_elem:
-        tournament['date'] = date_elem.get_text(strip=True)
-        # Also check datetime attribute
-        if date_elem.get('datetime'):
-            tournament['date'] = date_elem.get('datetime')[:10]
-    
-    # Get location
-    location_elem = element.select_one('.location, .tournament-location, .venue, .course-name')
-    if location_elem:
-        tournament['location'] = location_elem.get_text(strip=True)
-    
-    # Get tier (PDGA tier if available)
-    tier_elem = element.select_one('.tier, .pdga-tier, .event-tier, .badge')
-    if tier_elem:
-        tournament['tier'] = tier_elem.get_text(strip=True)
-    
-    return tournament
+    return sorted(tournaments, key=get_sort_key)
 
 
 def update_google_sheet(tournaments):
     """Update Google Sheet with tournament data."""
-    # Load credentials from environment variable
     creds_json = os.environ.get('GOOGLE_CREDENTIALS')
     if not creds_json:
         print("Error: GOOGLE_CREDENTIALS environment variable not set")
@@ -144,11 +204,11 @@ def update_google_sheet(tournaments):
     
     try:
         creds_dict = json.loads(creds_json)
+        print(f"Credentials loaded for: {creds_dict.get('client_email', 'unknown')}")
     except json.JSONDecodeError as e:
         print(f"Error parsing credentials JSON: {e}")
         return False
     
-    # Set up Google Sheets API
     scope = [
         'https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive'
@@ -158,10 +218,11 @@ def update_google_sheet(tournaments):
         credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
         client = gspread.authorize(credentials)
         
-        # Open the sheet
+        print(f"Opening sheet: {SHEET_ID}")
         sheet = client.open_by_key(SHEET_ID).sheet1
         
         # Clear existing data (except header row)
+        print("Clearing old data...")
         sheet.batch_clear(['A2:E1000'])
         
         # Prepare data rows
@@ -175,44 +236,57 @@ def update_google_sheet(tournaments):
                 t.get('url', '')
             ])
         
-        # Update sheet if we have data
         if rows:
+            print(f"Writing {len(rows)} rows...")
             sheet.update(f'A2:E{len(rows) + 1}', rows)
             print(f"Updated sheet with {len(rows)} tournaments")
         else:
             print("No tournaments to update")
         
-        # Update last-updated timestamp in a separate cell
-        sheet.update('G1', [[f'Last updated: {datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")}']])
+        # Update timestamp
+        timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+        sheet.update('G1', [[f'Last updated: {timestamp}']])
+        print(f"Timestamp updated: {timestamp}")
         
         return True
         
     except Exception as e:
         print(f"Error updating Google Sheet: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 
 def main():
-    print("Starting DGS tournament scraper...")
-    print(f"Target URL: {DGS_URL[:80]}...")
+    print("=" * 60)
+    print("DGS Tournament Scraper - Greenville NC Area (60 mile radius)")
+    print("=" * 60)
+    print()
     
     tournaments = scrape_tournaments()
     
+    print()
+    print("-" * 60)
+    
     if tournaments:
-        print("\nTournaments found:")
-        for t in tournaments[:5]:  # Print first 5 for debugging
-            print(f"  - {t.get('name', 'Unknown')} ({t.get('date', 'No date')})")
-        if len(tournaments) > 5:
-            print(f"  ... and {len(tournaments) - 5} more")
+        print(f"\nFound {len(tournaments)} tournaments near Greenville:")
+        for i, t in enumerate(tournaments, 1):
+            print(f"  {i}. {t.get('date', 'TBD'):15} | {t.get('name', '')[:40]}")
         
+        print()
         success = update_google_sheet(tournaments)
         if success:
-            print("\nSheet updated successfully!")
+            print("\n✅ Google Sheet updated successfully!")
         else:
-            print("\nFailed to update sheet")
+            print("\n❌ Failed to update Google Sheet")
+            return 1
     else:
-        print("\nNo tournaments found - check if DGS changed their HTML structure")
+        print("\n⚠️  No nearby tournaments found")
+        print("Updating sheet with empty data to show scraper ran...")
+        update_google_sheet([])
+    
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    exit(main())
