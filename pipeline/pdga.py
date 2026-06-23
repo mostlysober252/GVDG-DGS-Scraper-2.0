@@ -88,6 +88,18 @@ def requests_fetch_html(url: str) -> str:
     return response.text
 
 
+def extract_photo_url(html: str) -> str | None:
+    """Return the player's pdga.com profile photo URL, or None if they have no photo.
+
+    pdga.com renders the player photo as ``<img typeof="foaf:Image" src=".../pictures/...">``;
+    the site logo also uses <img> but lives under ``/themes/``, so we require ``/pictures/``.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    img = soup.find("img", attrs={"typeof": "foaf:Image"})
+    src = img.get("src") if img else None
+    return src if (src and "/pictures/" in src) else None
+
+
 def clean_player_name(title_segment: str) -> str:
     """Strip the trailing ``#<pdga-number>`` that pdga.com appends to the page title.
 
@@ -110,6 +122,7 @@ class Player:
         self.official_rating: int | None = None
         self.rating_date: str | None = None
         self.membership_status: str | None = None
+        self.photo_url: str | None = None
         self.ratings_detail_df: pd.DataFrame | None = None
 
 
@@ -146,6 +159,7 @@ class PdgaScraper:
                 "pdga.com profile layout may have changed."
             )
         player.name = clean_player_name(soup.title.string.split(" | ")[0])
+        player.photo_url = extract_photo_url(html)
 
         location = soup.find(*SEL_LOCATION)
         if location and ": " in location.text:

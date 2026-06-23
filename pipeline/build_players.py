@@ -95,6 +95,7 @@ def build_player_record(pdga_no: int, scraper: PdgaScraper) -> dict | None:
         "name": player.name,
         "official_rating": player.official_rating,
         "live_rating": live_rating,
+        "photo": player.photo_url,
         "rating_history": _build_rating_history(player.ratings_detail_df),
     }
 

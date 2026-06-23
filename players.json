@@ -1,11 +1,12 @@
 {
-  "lastUpdated": "2026-06-23T16:19:52.348370+00:00",
+  "lastUpdated": "2026-06-23T17:36:02.396554+00:00",
   "players": {
     "167210": {
       "pdga_no": 167210,
       "name": "Casey Clark",
       "official_rating": 926,
       "live_rating": 931,
+      "photo": "https://www.pdga.com/files/styles/large/public/pictures/picture-1804531-1776178823.jpg?itok=5i0h7BZa",
       "rating_history": [
         {
           "date": "2020-06-28",
@@ -354,6 +355,7 @@
       "name": "David Caravas",
       "official_rating": 854,
       "live_rating": 853,
+      "photo": null,
       "rating_history": [
         {
           "date": "2022-02-26",
@@ -577,6 +579,7 @@
       "name": "Tyler Adkins",
       "official_rating": 778,
       "live_rating": 778,
+      "photo": null,
       "rating_history": [
         {
           "date": "2025-04-06",

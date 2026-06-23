@@ -156,6 +156,7 @@ class TestBuild:
             "name",
             "official_rating",
             "live_rating",
+            "photo",
             "rating_history",
         }
         assert pat["live_rating"] == 948

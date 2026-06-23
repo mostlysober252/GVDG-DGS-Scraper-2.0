@@ -1,5 +1,15 @@
 """Unit tests for pdga.com parsing helpers."""
-from pipeline.pdga import clean_player_name
+from pipeline.pdga import clean_player_name, extract_photo_url
+
+
+def test_extracts_player_photo_url():
+    html = '<img typeof="foaf:Image" src="https://www.pdga.com/files/styles/large/public/pictures/picture-1.jpg?itok=x">'
+    assert extract_photo_url(html) == "https://www.pdga.com/files/styles/large/public/pictures/picture-1.jpg?itok=x"
+
+
+def test_no_photo_returns_none_and_ignores_site_logo():
+    html = '<img src="https://www.pdga.com/sites/all/themes/pdga/logo.png">'
+    assert extract_photo_url(html) is None
 
 
 def test_strips_trailing_pdga_number_suffix():
