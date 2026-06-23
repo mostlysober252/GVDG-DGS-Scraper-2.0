@@ -33,14 +33,17 @@ jobs:
       - name: Build players.json
         run: python -m pipeline.build_players --roster roster.json --out players.json
 
-      - name: Commit players.json
+      - name: Build stats.json
+        run: python -m pipeline.build_stats --roster roster.json --out stats.json
+
+      - name: Commit players.json and stats.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add players.json
+          git add players.json stats.json
           if git diff --staged --quiet; then
-            echo "No changes to players.json"
+            echo "No changes to players.json or stats.json"
           else
-            git commit -m "chore: update players.json [skip ci]"
+            git commit -m "chore: update players.json and stats.json [skip ci]"
             git push
           fi

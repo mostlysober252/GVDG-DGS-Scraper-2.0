@@ -172,7 +172,9 @@ class PdgaScraper:
     def _parse_ratings_detail(self, html: str) -> pd.DataFrame | None:
         """Parse the per-round ratings table; returns None if there is none."""
         try:
-            tables = pd.read_html(StringIO(html))
+            # Pin flavor to lxml so parsing is deterministic and never falls back to
+            # html5lib (an unpinned optional dep) on sparse/no-table pages.
+            tables = pd.read_html(StringIO(html), flavor="lxml")
         except ValueError:
             # No tables at all => player has no rated rounds.
             return None

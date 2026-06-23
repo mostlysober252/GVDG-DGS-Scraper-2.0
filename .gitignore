@@ -6,8 +6,8 @@ __pycache__/
 .venv/
 venv/
 
-# NOTE: players.json is intentionally NOT ignored — the GitHub Action
-# commits it back to the repo for the member portal to consume.
+# NOTE: players.json and stats.json are intentionally NOT ignored — the
+# GitHub Action commits them back to the repo for the member portal to consume.
 
 build_err.log
 *.log

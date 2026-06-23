@@ -16,6 +16,15 @@ The ported test cases in tests/test_rating.py are adapted from that project's
 tests/test_rating_calc.py and tests/test_rating_accuracy.py, and the regression
 fixture CSVs under tests/fixtures/ are copied from its tests/fixtures/.
 
+The "count_scores" score-distribution tally in pipeline/stats.py is a faithful
+port of "count_scores" from:
+
+    cclark20/disc-golf-data
+    https://github.com/cclark20/disc-golf-data
+    Licensed under the MIT License.
+
+    (src/udisc_live.py)
+
 MIT License (as provided by the upstream projects):
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
