@@ -1,0 +1,607 @@
+{
+  "lastUpdated": "2026-06-23T17:36:02.396554+00:00",
+  "players": {
+    "167210": {
+      "pdga_no": 167210,
+      "name": "Casey Clark",
+      "official_rating": 926,
+      "live_rating": 931,
+      "photo": "https://www.pdga.com/files/styles/large/public/pictures/picture-1804531-1776178823.jpg?itok=5i0h7BZa",
+      "rating_history": [
+        {
+          "date": "2020-06-28",
+          "rating": 915,
+          "event": "15th Annual Bayville Bash Driven by Innova - Pro & MA1"
+        },
+        {
+          "date": "2020-09-07",
+          "rating": 896,
+          "event": "COVA DGC 2020 Monday Night League (3 of 3)"
+        },
+        {
+          "date": "2021-04-17",
+          "rating": 945,
+          "event": "14th Annual Bayville Spring Pro/Am"
+        },
+        {
+          "date": "2021-04-18",
+          "rating": 955,
+          "event": "24th Annual Colonial Spring Pro/Am"
+        },
+        {
+          "date": "2021-06-06",
+          "rating": 906,
+          "event": "13th Annual No Quarter at New Quarter - All Pro, MA1, MA40"
+        },
+        {
+          "date": "2021-06-21",
+          "rating": 892,
+          "event": "2021 COVA DGC Monday Night League (1 of 2)"
+        },
+        {
+          "date": "2021-06-27",
+          "rating": 946,
+          "event": "16th Annual Bayville Bash Sponsored by Dynamic Discs"
+        },
+        {
+          "date": "2021-07-11",
+          "rating": 892,
+          "event": "The Lair Championship - Pros, MA1, MA40"
+        },
+        {
+          "date": "2021-08-08",
+          "rating": 923,
+          "event": "NADGT Premier @ Colonial Showdown"
+        },
+        {
+          "date": "2021-08-30",
+          "rating": 900,
+          "event": "2021 COVA DGC Monday Night League (2 of 2)"
+        },
+        {
+          "date": "2021-09-19",
+          "rating": 904,
+          "event": "Dorey Park Championships Presented by Play It Again Sports RVA - All Pro, MA1, MA2, MA40"
+        },
+        {
+          "date": "2021-11-07",
+          "rating": 927,
+          "event": "24th Annual Colonial Fall Colors"
+        },
+        {
+          "date": "2022-02-26",
+          "rating": 903,
+          "event": "ODDS #1 - Loriella Challenge AM - All AMs except MA1 & MA40"
+        },
+        {
+          "date": "2022-04-10",
+          "rating": 934,
+          "event": "25th Annual Colonial Spring Pro/Am - All Pro, MA1 & MA40"
+        },
+        {
+          "date": "2022-05-15",
+          "rating": 930,
+          "event": "ODDS # 5 Tour De Richmond Presented By Play it Again Sports"
+        },
+        {
+          "date": "2022-06-04",
+          "rating": 928,
+          "event": "The Lair Championship- Ams except MA1 and MA40"
+        },
+        {
+          "date": "2022-06-05",
+          "rating": 941,
+          "event": "14th Annual No Quarter at New Quarter - All Am except MA1 & MA40"
+        },
+        {
+          "date": "2022-07-24",
+          "rating": 951,
+          "event": "ODDS #9- Raptor's Roost Open"
+        },
+        {
+          "date": "2022-07-31",
+          "rating": 940,
+          "event": "2022 Anhyzers for Autism Presented by Good Sports Disc Golf - MA2, FA2, MA3, FA3, MA4, FA4 (CEP Charity - Rated)"
+        },
+        {
+          "date": "2022-09-17",
+          "rating": 942,
+          "event": "Dorey Park Championships presented by Play It Again Sports - All Other Am Divisions"
+        },
+        {
+          "date": "2022-11-13",
+          "rating": 925,
+          "event": "25th Annual Colonial Fall Colors - All Ams- Driven by Innova"
+        },
+        {
+          "date": "2022-11-27",
+          "rating": 938,
+          "event": "2022 Dave Tyree Memorial Championship (CEP Charity - Rated)"
+        },
+        {
+          "date": "2023-02-04",
+          "rating": 901,
+          "event": "2023 TrueTimber Saturday Series Presented by Good Sports Disc Golf- Event #2"
+        },
+        {
+          "date": "2023-04-01",
+          "rating": 891,
+          "event": "2023 Anhyzers for Autism Presented by Good Sports Disc Golf - All Pro & Advanced (CEP Charity - Rated)"
+        },
+        {
+          "date": "2023-04-02",
+          "rating": 974,
+          "event": "2023 Anhyzers for Autism Presented by Good Sports Disc Golf - All Intermediate, Recreational & Novice (CEP Charity - Rated)"
+        },
+        {
+          "date": "2023-04-15",
+          "rating": 905,
+          "event": "16th Annual Bayville Spring Pro-Am - All Ams except MA1 & MA40 - Driven by Innova"
+        },
+        {
+          "date": "2023-04-30",
+          "rating": 927,
+          "event": "Prodigy presents Lake Marshall Open - Amateur"
+        },
+        {
+          "date": "2023-05-07",
+          "rating": 941,
+          "event": "ODDS #5 - 2023 Tour De Richmond Presented by Play It Again Sports"
+        },
+        {
+          "date": "2023-06-03",
+          "rating": 937,
+          "event": "15th Annual No Quarter at New Quarter - All Pro, MA1, MA40"
+        },
+        {
+          "date": "2023-06-04",
+          "rating": 929,
+          "event": "15th Annual No Quarter at New Quarter - All Am except MA1/MA40"
+        },
+        {
+          "date": "2023-06-10",
+          "rating": 922,
+          "event": "2023 Battlefield Open presented by Play it Again Sports"
+        },
+        {
+          "date": "2023-07-09",
+          "rating": 923,
+          "event": "Raptor's Roost Open- ODDS #8"
+        },
+        {
+          "date": "2023-07-30",
+          "rating": 932,
+          "event": "2023 NADGT Zanfel Premier Tour: VIRGINIA Presented by Discmania"
+        },
+        {
+          "date": "2023-09-10",
+          "rating": 961,
+          "event": "Hawk Hollow Open"
+        },
+        {
+          "date": "2023-09-17",
+          "rating": 941,
+          "event": "2023 Dorey Park Championships presented by Play It Again Sports - Amateur"
+        },
+        {
+          "date": "2023-11-04",
+          "rating": 927,
+          "event": "2023 NADGT National Championships"
+        },
+        {
+          "date": "2023-11-12",
+          "rating": 953,
+          "event": "Toyo Concrete presents the 26th Annual Colonial Fall Colors sponsored by Dynamic Discs - All Am"
+        },
+        {
+          "date": "2023-11-26",
+          "rating": 959,
+          "event": "Dave Tyree Memorial Championships"
+        },
+        {
+          "date": "2024-02-25",
+          "rating": 938,
+          "event": "ODDS #1 - Loriella Challenge AM presented by INNOVA (MA1 & MA40)"
+        },
+        {
+          "date": "2024-03-16",
+          "rating": 973,
+          "event": "2024 VDGT Odin Series #1: Battle of Mj\u00f6lnir"
+        },
+        {
+          "date": "2024-04-06",
+          "rating": 927,
+          "event": "2024 Anhyzers for Autism - All Amateurs (Except Advanced Divisions) (CEP Charity - Rated)Powered by Innova"
+        },
+        {
+          "date": "2024-04-07",
+          "rating": 924,
+          "event": "2024 Anhyzers for Autism - All Pro and Advanced Divisions (CEP Charity - Rated)"
+        },
+        {
+          "date": "2024-04-13",
+          "rating": 952,
+          "event": "27th Annual Colonial Spring Pro/Am - All Am except MA1 & MA40"
+        },
+        {
+          "date": "2024-04-28",
+          "rating": 958,
+          "event": "Prodigy presents Lake Marshall Open- Amateur"
+        },
+        {
+          "date": "2024-05-05",
+          "rating": 946,
+          "event": "Tour de Richmond presented by Play it Again Sports"
+        },
+        {
+          "date": "2024-09-01",
+          "rating": 940,
+          "event": "MVP Disc Sports Presents: The Basket Bashers Virginia Amateur Tour - Bryan Park"
+        },
+        {
+          "date": "2024-09-15",
+          "rating": 929,
+          "event": "SpAm - Spotsy Amateur Championships"
+        },
+        {
+          "date": "2024-09-21",
+          "rating": 935,
+          "event": "Lake Marshall Lair Championship"
+        },
+        {
+          "date": "2024-10-20",
+          "rating": 908,
+          "event": "Mountain Jam - MPO, MP40, MP50, MA1, MA40, FPO"
+        },
+        {
+          "date": "2024-11-03",
+          "rating": 932,
+          "event": "True Timber Open presented by Good Sports Discs - Pro, MA1, MA40"
+        },
+        {
+          "date": "2024-11-10",
+          "rating": 884,
+          "event": "Toyo Concrete presents the 27th Annual Colonial Fall Colors - All Pro and MA1 sponsored by Latitude 64"
+        },
+        {
+          "date": "2024-12-01",
+          "rating": 977,
+          "event": "Dave Tyree Memorial Championships (CEP Charity - Rated)"
+        },
+        {
+          "date": "2025-02-23",
+          "rating": 970,
+          "event": "ODDS #1 - Loriella Challenge AM presented by INNOVA (MA1 & MA40)"
+        },
+        {
+          "date": "2025-04-06",
+          "rating": 887,
+          "event": "Anhyzers for Autism (CEP Charity - Rated) - Mixed Pro, MA1, MA2, MA40"
+        },
+        {
+          "date": "2025-04-12",
+          "rating": 939,
+          "event": "28th Annual Colonial Spring Pro/Am - All Pro, MA1, MA40, FA1, FA40"
+        },
+        {
+          "date": "2025-04-27",
+          "rating": 973,
+          "event": "Prodigy presents Lake Marshall Open- Amateur"
+        },
+        {
+          "date": "2025-06-07",
+          "rating": 927,
+          "event": "17th No Quarter at New Quarter - All Pro divisions, MA1, MA40"
+        },
+        {
+          "date": "2025-06-14",
+          "rating": 903,
+          "event": "Battlefield Open presented by Westside Discs"
+        },
+        {
+          "date": "2025-06-29",
+          "rating": 952,
+          "event": "20th Annual Bayville Bash"
+        },
+        {
+          "date": "2025-07-20",
+          "rating": 934,
+          "event": "Tour de Richmond presented by MVP Disc Sports and GoodSports Discs"
+        },
+        {
+          "date": "2025-09-14",
+          "rating": 852,
+          "event": "Hawk Hollow Open - Pros and MA1"
+        },
+        {
+          "date": "2026-02-21",
+          "rating": 944,
+          "event": "ODDS #1 - Loriella Challenge AM - All AM except MA1 & MA40"
+        },
+        {
+          "date": "2026-04-03",
+          "rating": 927,
+          "event": "2026 NADGT Flex @ Bryan Park"
+        },
+        {
+          "date": "2026-04-11",
+          "rating": 941,
+          "event": "19th Annual Bayville Spring Pro-Am"
+        },
+        {
+          "date": "2026-04-12",
+          "rating": 938,
+          "event": "29th Annual Colonial Spring Pro/Am"
+        },
+        {
+          "date": "2026-04-26",
+          "rating": 988,
+          "event": "Prodigy presents the Lake Marshall Open- Amateur"
+        },
+        {
+          "date": "2026-05-26",
+          "rating": 955,
+          "event": "RVA Spring League presented by Fly High Sports"
+        },
+        {
+          "date": "2026-06-06",
+          "rating": 929,
+          "event": "18th Annual No Quarter at New Quarter - All Pro, MA1, MA40"
+        }
+      ]
+    },
+    "204766": {
+      "pdga_no": 204766,
+      "name": "David Caravas",
+      "official_rating": 854,
+      "live_rating": 853,
+      "photo": null,
+      "rating_history": [
+        {
+          "date": "2022-02-26",
+          "rating": 809,
+          "event": "ODDS #1 - Loriella Challenge AM - All AMs except MA1 & MA40"
+        },
+        {
+          "date": "2022-04-02",
+          "rating": 836,
+          "event": "Whips & Chains"
+        },
+        {
+          "date": "2022-04-09",
+          "rating": 877,
+          "event": "25th Annual Colonial Spring Pro/Am - All Am except MA1 & MA40"
+        },
+        {
+          "date": "2022-04-10",
+          "rating": 846,
+          "event": "25th Annual Colonial Spring Pro/Am - All Pro, MA1 & MA40"
+        },
+        {
+          "date": "2022-05-15",
+          "rating": 856,
+          "event": "ODDS # 5 Tour De Richmond Presented By Play it Again Sports"
+        },
+        {
+          "date": "2022-06-05",
+          "rating": 874,
+          "event": "14th Annual No Quarter at New Quarter - All Am except MA1 & MA40"
+        },
+        {
+          "date": "2022-07-24",
+          "rating": 850,
+          "event": "ODDS #9- Raptor's Roost Open"
+        },
+        {
+          "date": "2022-07-31",
+          "rating": 852,
+          "event": "2022 Anhyzers for Autism Presented by Good Sports Disc Golf - MA2, FA2, MA3, FA3, MA4, FA4 (CEP Charity - Rated)"
+        },
+        {
+          "date": "2022-09-17",
+          "rating": 809,
+          "event": "Dorey Park Championships presented by Play It Again Sports - All Other Am Divisions"
+        },
+        {
+          "date": "2022-11-13",
+          "rating": 829,
+          "event": "25th Annual Colonial Fall Colors - All Ams- Driven by Innova"
+        },
+        {
+          "date": "2023-02-04",
+          "rating": 790,
+          "event": "2023 TrueTimber Saturday Series Presented by Good Sports Disc Golf- Event #2"
+        },
+        {
+          "date": "2023-04-01",
+          "rating": 891,
+          "event": "2023 Anhyzers for Autism Presented by Good Sports Disc Golf - All Pro & Advanced (CEP Charity - Rated)"
+        },
+        {
+          "date": "2023-04-15",
+          "rating": 855,
+          "event": "16th Annual Bayville Spring Pro-Am - All Ams except MA1 & MA40 - Driven by Innova"
+        },
+        {
+          "date": "2023-04-30",
+          "rating": 852,
+          "event": "Prodigy presents Lake Marshall Open - Amateur"
+        },
+        {
+          "date": "2023-05-07",
+          "rating": 825,
+          "event": "ODDS #5 - 2023 Tour De Richmond Presented by Play It Again Sports"
+        },
+        {
+          "date": "2023-06-10",
+          "rating": 819,
+          "event": "2023 Battlefield Open presented by Play it Again Sports"
+        },
+        {
+          "date": "2023-07-09",
+          "rating": 860,
+          "event": "Raptor's Roost Open- ODDS #8"
+        },
+        {
+          "date": "2023-07-30",
+          "rating": 874,
+          "event": "2023 NADGT Zanfel Premier Tour: VIRGINIA Presented by Discmania"
+        },
+        {
+          "date": "2023-09-10",
+          "rating": 837,
+          "event": "Hawk Hollow Open"
+        },
+        {
+          "date": "2023-11-12",
+          "rating": 878,
+          "event": "Toyo Concrete presents the 26th Annual Colonial Fall Colors sponsored by Dynamic Discs - All Am"
+        },
+        {
+          "date": "2024-04-06",
+          "rating": 818,
+          "event": "2024 Anhyzers for Autism - All Amateurs (Except Advanced Divisions) (CEP Charity - Rated)Powered by Innova"
+        },
+        {
+          "date": "2024-04-13",
+          "rating": 859,
+          "event": "27th Annual Colonial Spring Pro/Am - All Am except MA1 & MA40"
+        },
+        {
+          "date": "2024-05-05",
+          "rating": 810,
+          "event": "Tour de Richmond presented by Play it Again Sports"
+        },
+        {
+          "date": "2024-09-08",
+          "rating": 832,
+          "event": "Dorey Park Championships presented by Play It Again Sports - All Other Divisions"
+        },
+        {
+          "date": "2025-04-12",
+          "rating": 852,
+          "event": "18th Annual Bayville Spring Pro-Am - All Am Excluding MA1/MA40/FA1/FA40"
+        },
+        {
+          "date": "2025-04-27",
+          "rating": 905,
+          "event": "Prodigy presents Lake Marshall Open- Amateur"
+        },
+        {
+          "date": "2025-05-12",
+          "rating": 835,
+          "event": "Coastal Virginia Disc Golf Club Monday Night League @ Bayville (1 of 3)"
+        },
+        {
+          "date": "2025-06-07",
+          "rating": 792,
+          "event": "17th No Quarter at New Quarter - All Pro divisions, MA1, MA40"
+        },
+        {
+          "date": "2025-06-08",
+          "rating": 913,
+          "event": "17th No Quarter at New Quarter - All Am divisions except MA1, MA40"
+        },
+        {
+          "date": "2025-06-14",
+          "rating": 934,
+          "event": "Battlefield Open presented by Westside Discs"
+        },
+        {
+          "date": "2025-06-29",
+          "rating": 836,
+          "event": "20th Annual Bayville Bash"
+        },
+        {
+          "date": "2025-07-07",
+          "rating": 862,
+          "event": "Coastal Virginia Disc Golf Club Monday Night League @ Bayville (2 of 3)"
+        },
+        {
+          "date": "2025-07-20",
+          "rating": 960,
+          "event": "Tour de Richmond presented by MVP Disc Sports and GoodSports Discs"
+        },
+        {
+          "date": "2025-07-27",
+          "rating": 850,
+          "event": "2025 NADGT x Zanfel Tour Virginia Premier: Colonial Showdown"
+        },
+        {
+          "date": "2025-08-25",
+          "rating": 896,
+          "event": "Coastal Virginia Disc Golf Club Monday Night League @ Bayville (3 of 3)"
+        },
+        {
+          "date": "2025-09-06",
+          "rating": 883,
+          "event": "Dorey Park Championships - All Ladies and Amateurs (Except MA1, MA40 and MA2)"
+        },
+        {
+          "date": "2025-09-20",
+          "rating": 850,
+          "event": "The Lair Championship - Amateurs except MA1/FA1"
+        },
+        {
+          "date": "2025-10-19",
+          "rating": 913,
+          "event": "The Amateur Challenge at the DGPT Championship"
+        },
+        {
+          "date": "2026-02-21",
+          "rating": 899,
+          "event": "ODDS #1 - Loriella Challenge AM - All AM except MA1 & MA40"
+        },
+        {
+          "date": "2026-04-11",
+          "rating": 868,
+          "event": "19th Annual Bayville Spring Pro-Am"
+        },
+        {
+          "date": "2026-04-12",
+          "rating": 896,
+          "event": "29th Annual Colonial Spring Pro/Am"
+        },
+        {
+          "date": "2026-04-26",
+          "rating": 898,
+          "event": "Prodigy presents the Lake Marshall Open- Amateur"
+        },
+        {
+          "date": "2026-05-11",
+          "rating": 904,
+          "event": "2026 COVA DGC Monday Night League @ Bayville (1 of 3)"
+        }
+      ]
+    },
+    "298827": {
+      "pdga_no": 298827,
+      "name": "Tyler Adkins",
+      "official_rating": 778,
+      "live_rating": 778,
+      "photo": null,
+      "rating_history": [
+        {
+          "date": "2025-04-06",
+          "rating": 773,
+          "event": "The Southern Maryland Classic"
+        },
+        {
+          "date": "2026-01-18",
+          "rating": 818,
+          "event": "SOMD ICE BOWL (Unrated)"
+        },
+        {
+          "date": "2026-02-16",
+          "rating": 783,
+          "event": "Presidents Day Singles at Mellomar"
+        },
+        {
+          "date": "2026-03-22",
+          "rating": 831,
+          "event": "Birdogey Challenge 3"
+        }
+      ]
+    }
+  }
+}

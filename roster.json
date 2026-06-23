@@ -1,0 +1,8 @@
+{
+  "_comment": "GVDG club roster: list of PDGA numbers to build live ratings for. The numbers below are REAL pdga.com player numbers borrowed from the upstream pdga-whats-my-rating test fixtures (placeholders until the club provides its real member list). Replace with actual GVDG member PDGA #s.",
+  "pdga_numbers": [
+    167210,
+    204766,
+    298827
+  ]
+}
